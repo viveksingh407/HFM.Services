@@ -1,0 +1,32 @@
+﻿@using HFM.Web.Models;
+
+@model TransactionDetails
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<table>
+    <tr>
+        <th>
+            TransactionId
+        </th>
+        <th>
+            TransactionDetailsName
+        </th>
+    </tr>
+    @foreach (var data in Model.FinanceTransactionDetails)
+    {
+        <tr>
+            <td>
+                @data.TransactionDetailsId
+            </td>
+            <td>
+               @data.TransactionDetailsName
+            </td>
+        </tr>
+    }
+</table>
+

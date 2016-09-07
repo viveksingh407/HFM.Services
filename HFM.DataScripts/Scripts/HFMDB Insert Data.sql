@@ -1,0 +1,56 @@
+USE HFMDB
+GO
+
+INSERT INTO ExpenseType(ExpenseTypeName, ExpenseTypeCode) VALUES ('Fixed', 'F')
+INSERT INTO ExpenseType(ExpenseTypeName, ExpenseTypeCode) VALUES ('Variable', 'V')
+
+INSERT INTO ExpenseAmountType(ExpenseAmountTypeName, ExpenseAmountTypeCode) VALUES ('Fixed', 'F')
+INSERT INTO ExpenseAmountType(ExpenseAmountTypeName, ExpenseAmountTypeCode) VALUES ('Variable', 'V')
+
+INSERT INTO TransactionType(TransactionTypeName, TransactionTypeCode) VALUES ('Credit', 'CR')
+INSERT INTO TransactionType(TransactionTypeName, TransactionTypeCode) VALUES ('Debit', 'DB')
+
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Income')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Bills')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Grocery')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Subscriptions')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Rent')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('EMI')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Car')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Food')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Trip')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Shopping')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Gifts')
+INSERT INTO TransactionCategory(TransactionCategoryName) VALUES ('Money Transfer')
+
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (2, 'AUM', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (2, 'PSE', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (2, 'Comcast', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (2, 'AT&T', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (6, 'Car Insurance', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (6, 'Rental Insurance', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (4, 'Xbox', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (4, 'Netflix', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (4, 'LAFitness', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (4, 'IndiaLD', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (4, 'SoundTransit', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (4, 'Google Play', 2, 2, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (3, 'DK', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (3, 'Costco', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (3, 'Fred Meyers', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (5, 'Rent', 2, 1, 1, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (7, 'Gas', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (8, 'Vivek Lunch', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (8, 'Naan and Curry', 2, 2, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (8, 'Benson Pizza', 2, 2, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (8, 'Chat House', 2, 2, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (8, 'Restaurants', 2, 2, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (9, 'Trip', 2, 2, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (10, 'Vivek Shopping', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (10, 'Ashmi Shopping', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (10, 'Kritika Shopping', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (10, 'Household Shopping', 2, 1, 2, GetDate(), GetDate())
+INSERT INTO TransactionDetails(TransactionCategoryId, TransactionDetailsName, TransactionTypeId, ExpenseTypeId, ExpenseAmountTypeId, ModifiedDate, CreatedDate) VALUES (11, 'Xoom', 2, 2, 2, GetDate(), GetDate())
+
+
+

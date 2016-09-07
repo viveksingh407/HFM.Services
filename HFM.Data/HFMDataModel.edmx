@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HFMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ExpenseAmountType">
+          <Key>
+            <PropertyRef Name="ExpenseAmountTypeId" />
+          </Key>
+          <Property Name="ExpenseAmountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpenseAmountTypeName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExpenseAmountTypeCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="ExpenseAmountFixedFrom" Type="datetime" />
+          <Property Name="ExpenseAmountFixedTo" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ExpenseType">
+          <Key>
+            <PropertyRef Name="ExpenseTypeId" />
+          </Key>
+          <Property Name="ExpenseTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpenseTypeName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ExpenseTypeCode" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionCategory">
+          <Key>
+            <PropertyRef Name="TransactionCategoryId" />
+          </Key>
+          <Property Name="TransactionCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionCategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionDetails">
+          <Key>
+            <PropertyRef Name="TransactionDetailsId" />
+          </Key>
+          <Property Name="TransactionDetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionCategoryId" Type="int" Nullable="false" />
+          <Property Name="TransactionDetailsName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransactionTypeId" Type="int" Nullable="false" />
+          <Property Name="ExpenseTypeId" Type="int" Nullable="false" />
+          <Property Name="ExpenseAmountTypeId" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeId" />
+          </Key>
+          <Property Name="TransactionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionTypeName" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TransactionTypeCode" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Transacti__Expen__5DCAEF64">
+          <End Role="ExpenseType" Type="Self.ExpenseType" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenseType">
+              <PropertyRef Name="ExpenseTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="ExpenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Expen__5EBF139D">
+          <End Role="ExpenseAmountType" Type="Self.ExpenseAmountType" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenseAmountType">
+              <PropertyRef Name="ExpenseAmountTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="ExpenseAmountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Trans__5BE2A6F2">
+          <End Role="TransactionCategory" Type="Self.TransactionCategory" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionCategory">
+              <PropertyRef Name="TransactionCategoryId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="TransactionCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Trans__5CD6CB2B">
+          <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="TransactionTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HFMDBModelStoreContainer">
+          <EntitySet Name="ExpenseAmountType" EntityType="Self.ExpenseAmountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExpenseType" EntityType="Self.ExpenseType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionCategory" EntityType="Self.TransactionCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Transacti__Expen__5DCAEF64" Association="Self.FK__Transacti__Expen__5DCAEF64">
+            <End Role="ExpenseType" EntitySet="ExpenseType" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Expen__5EBF139D" Association="Self.FK__Transacti__Expen__5EBF139D">
+            <End Role="ExpenseAmountType" EntitySet="ExpenseAmountType" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Trans__5BE2A6F2" Association="Self.FK__Transacti__Trans__5BE2A6F2">
+            <End Role="TransactionCategory" EntitySet="TransactionCategory" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Trans__5CD6CB2B" Association="Self.FK__Transacti__Trans__5CD6CB2B">
+            <End Role="TransactionType" EntitySet="TransactionType" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HFMDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ExpenseAmountType">
+          <Key>
+            <PropertyRef Name="ExpenseAmountTypeId" />
+          </Key>
+          <Property Name="ExpenseAmountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenseAmountTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpenseAmountTypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpenseAmountFixedFrom" Type="DateTime" Precision="3" />
+          <Property Name="ExpenseAmountFixedTo" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__Expen__5EBF139D" FromRole="ExpenseAmountType" ToRole="TransactionDetails" />
+        </EntityType>
+        <EntityType Name="ExpenseType">
+          <Key>
+            <PropertyRef Name="ExpenseTypeId" />
+          </Key>
+          <Property Name="ExpenseTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenseTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpenseTypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__Expen__5DCAEF64" FromRole="ExpenseType" ToRole="TransactionDetails" />
+        </EntityType>
+        <EntityType Name="TransactionCategory">
+          <Key>
+            <PropertyRef Name="TransactionCategoryId" />
+          </Key>
+          <Property Name="TransactionCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__Trans__5BE2A6F2" FromRole="TransactionCategory" ToRole="TransactionDetails" />
+        </EntityType>
+        <EntityType Name="TransactionDetail">
+          <Key>
+            <PropertyRef Name="TransactionDetailsId" />
+          </Key>
+          <Property Name="TransactionDetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionCategoryId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDetailsName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ExpenseTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ExpenseAmountTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ExpenseAmountType" Relationship="Self.FK__Transacti__Expen__5EBF139D" FromRole="TransactionDetails" ToRole="ExpenseAmountType" />
+          <NavigationProperty Name="ExpenseType" Relationship="Self.FK__Transacti__Expen__5DCAEF64" FromRole="TransactionDetails" ToRole="ExpenseType" />
+          <NavigationProperty Name="TransactionCategory" Relationship="Self.FK__Transacti__Trans__5BE2A6F2" FromRole="TransactionDetails" ToRole="TransactionCategory" />
+          <NavigationProperty Name="TransactionType" Relationship="Self.FK__Transacti__Trans__5CD6CB2B" FromRole="TransactionDetails" ToRole="TransactionType" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="TransactionTypeId" />
+          </Key>
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionTypeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TransactionTypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TransactionDetails" Relationship="Self.FK__Transacti__Trans__5CD6CB2B" FromRole="TransactionType" ToRole="TransactionDetails" />
+        </EntityType>
+        <Association Name="FK__Transacti__Expen__5EBF139D">
+          <End Role="ExpenseAmountType" Type="Self.ExpenseAmountType" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenseAmountType">
+              <PropertyRef Name="ExpenseAmountTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="ExpenseAmountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Expen__5DCAEF64">
+          <End Role="ExpenseType" Type="Self.ExpenseType" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExpenseType">
+              <PropertyRef Name="ExpenseTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="ExpenseTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Trans__5BE2A6F2">
+          <End Role="TransactionCategory" Type="Self.TransactionCategory" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionCategory">
+              <PropertyRef Name="TransactionCategoryId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="TransactionCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Trans__5CD6CB2B">
+          <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="TransactionTypeId" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="TransactionTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HFMDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ExpenseAmountTypes" EntityType="Self.ExpenseAmountType" />
+          <EntitySet Name="ExpenseTypes" EntityType="Self.ExpenseType" />
+          <EntitySet Name="TransactionCategories" EntityType="Self.TransactionCategory" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetail" />
+          <EntitySet Name="TransactionTypes" EntityType="Self.TransactionType" />
+          <AssociationSet Name="FK__Transacti__Expen__5EBF139D" Association="Self.FK__Transacti__Expen__5EBF139D">
+            <End Role="ExpenseAmountType" EntitySet="ExpenseAmountTypes" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Expen__5DCAEF64" Association="Self.FK__Transacti__Expen__5DCAEF64">
+            <End Role="ExpenseType" EntitySet="ExpenseTypes" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Trans__5BE2A6F2" Association="Self.FK__Transacti__Trans__5BE2A6F2">
+            <End Role="TransactionCategory" EntitySet="TransactionCategories" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Trans__5CD6CB2B" Association="Self.FK__Transacti__Trans__5CD6CB2B">
+            <End Role="TransactionType" EntitySet="TransactionTypes" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HFMDBModelStoreContainer" CdmEntityContainer="HFMDBEntities">
+          <EntitySetMapping Name="ExpenseAmountTypes">
+            <EntityTypeMapping TypeName="HFMDBModel.ExpenseAmountType">
+              <MappingFragment StoreEntitySet="ExpenseAmountType">
+                <ScalarProperty Name="ExpenseAmountTypeId" ColumnName="ExpenseAmountTypeId" />
+                <ScalarProperty Name="ExpenseAmountTypeName" ColumnName="ExpenseAmountTypeName" />
+                <ScalarProperty Name="ExpenseAmountTypeCode" ColumnName="ExpenseAmountTypeCode" />
+                <ScalarProperty Name="ExpenseAmountFixedFrom" ColumnName="ExpenseAmountFixedFrom" />
+                <ScalarProperty Name="ExpenseAmountFixedTo" ColumnName="ExpenseAmountFixedTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExpenseTypes">
+            <EntityTypeMapping TypeName="HFMDBModel.ExpenseType">
+              <MappingFragment StoreEntitySet="ExpenseType">
+                <ScalarProperty Name="ExpenseTypeId" ColumnName="ExpenseTypeId" />
+                <ScalarProperty Name="ExpenseTypeName" ColumnName="ExpenseTypeName" />
+                <ScalarProperty Name="ExpenseTypeCode" ColumnName="ExpenseTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionCategories">
+            <EntityTypeMapping TypeName="HFMDBModel.TransactionCategory">
+              <MappingFragment StoreEntitySet="TransactionCategory">
+                <ScalarProperty Name="TransactionCategoryId" ColumnName="TransactionCategoryId" />
+                <ScalarProperty Name="TransactionCategoryName" ColumnName="TransactionCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDetails">
+            <EntityTypeMapping TypeName="HFMDBModel.TransactionDetail">
+              <MappingFragment StoreEntitySet="TransactionDetails">
+                <ScalarProperty Name="TransactionDetailsId" ColumnName="TransactionDetailsId" />
+                <ScalarProperty Name="TransactionCategoryId" ColumnName="TransactionCategoryId" />
+                <ScalarProperty Name="TransactionDetailsName" ColumnName="TransactionDetailsName" />
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+                <ScalarProperty Name="ExpenseTypeId" ColumnName="ExpenseTypeId" />
+                <ScalarProperty Name="ExpenseAmountTypeId" ColumnName="ExpenseAmountTypeId" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="HFMDBModel.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+                <ScalarProperty Name="TransactionTypeName" ColumnName="TransactionTypeName" />
+                <ScalarProperty Name="TransactionTypeCode" ColumnName="TransactionTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

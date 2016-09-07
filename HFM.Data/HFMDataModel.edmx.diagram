@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="af3ffb7e89af4f94b60e3999cd555f9b" Name="Diagram1">
+        <EntityTypeShape EntityType="HFMDBModel.ExpenseAmountType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HFMDBModel.ExpenseType" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HFMDBModel.TransactionCategory" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HFMDBModel.TransactionDetail" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HFMDBModel.TransactionType" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="HFMDBModel.FK__Transacti__Expen__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="HFMDBModel.FK__Transacti__Expen__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="HFMDBModel.FK__Transacti__Trans__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="HFMDBModel.FK__Transacti__Trans__5CD6CB2B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
