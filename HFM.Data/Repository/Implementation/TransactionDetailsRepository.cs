@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HFM.Data;
+using HFM.Data.EF;
 
 namespace HFM.Data.Repository.Implementation
 {

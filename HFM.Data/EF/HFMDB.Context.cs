@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HFM.Data
+namespace HFM.Data.EF
 {
     using System;
     using System.Data.Entity;
@@ -25,8 +25,13 @@ namespace HFM.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<DailyTransaction> DailyTransactions { get; set; }
         public virtual DbSet<ExpenseAmountType> ExpenseAmountTypes { get; set; }
         public virtual DbSet<ExpenseType> ExpenseTypes { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
+        public virtual DbSet<PurchaseLocation> PurchaseLocations { get; set; }
+        public virtual DbSet<StoreInventory> StoreInventories { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
         public virtual DbSet<TransactionCategory> TransactionCategories { get; set; }
         public virtual DbSet<TransactionDetail> TransactionDetails { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }

@@ -7,24 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HFM.Data
+namespace HFM.Data.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ExpenseAmountType
+    public partial class TransactionType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ExpenseAmountType()
+        public TransactionType()
         {
             this.TransactionDetails = new HashSet<TransactionDetail>();
         }
     
-        public int ExpenseAmountTypeId { get; set; }
-        public string ExpenseAmountTypeName { get; set; }
-        public string ExpenseAmountTypeCode { get; set; }
-        public Nullable<System.DateTime> ExpenseAmountFixedFrom { get; set; }
-        public Nullable<System.DateTime> ExpenseAmountFixedTo { get; set; }
+        public int TransactionTypeId { get; set; }
+        public string TransactionTypeName { get; set; }
+        public string TransactionTypeCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }

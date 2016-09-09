@@ -52,28 +52,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\DailyTransaction.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ExpenseAmountType.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ExpenseType.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\HFMDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HFMDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\HFMDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\HFMDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HFMDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Inventory.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\PurchaseLocation.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Store.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\StoreInventory.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TransactionCategory.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TransactionDetail.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TransactionType.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="HFMRepository.cs" />
-    <Compile Include="ExpenseAmountType.cs">
-      <DependentUpon>HFMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ExpenseType.cs">
-      <DependentUpon>HFMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HFMDataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HFMDataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HFMDataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HFMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="HFMDataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HFMDataModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IHFMRepository.cs" />
     <Compile Include="Repository\Implementation\ExpenseAmountTypeRepository.cs" />
@@ -81,43 +105,34 @@
     <Compile Include="Repository\Implementation\TransactionCategoryRepository.cs" />
     <Compile Include="Repository\Implementation\TransactionDetailsRepository.cs" />
     <Compile Include="Repository\Implementation\TransactionTypeRepository.cs" />
-    <Compile Include="TransactionCategory.cs">
-      <DependentUpon>HFMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TransactionDetail.cs">
-      <DependentUpon>HFMDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TransactionType.cs">
-      <DependentUpon>HFMDataModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="HFMDataModel.edmx">
+    <EntityDeploy Include="EF\HFMDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HFMDataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>HFMDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="HFMDataModel.edmx.diagram">
-      <DependentUpon>HFMDataModel.edmx</DependentUpon>
+    <None Include="EF\HFMDB.edmx.diagram">
+      <DependentUpon>HFMDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HFMDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HFMDataModel.edmx</DependentUpon>
-      <LastGenOutput>HFMDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="HFMDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HFMDataModel.edmx</DependentUpon>
-      <LastGenOutput>HFMDataModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="EF\HFMDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HFMDB.edmx</DependentUpon>
+      <LastGenOutput>HFMDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\HFMDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HFMDB.edmx</DependentUpon>
+      <LastGenOutput>HFMDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

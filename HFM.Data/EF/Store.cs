@@ -7,23 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HFM.Data
+namespace HFM.Data.EF
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TransactionCategory
+    public partial class Store
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TransactionCategory()
+        public Store()
         {
-            this.TransactionDetails = new HashSet<TransactionDetail>();
+            this.DailyTransactions = new HashSet<DailyTransaction>();
+            this.StoreInventories = new HashSet<StoreInventory>();
         }
     
-        public int TransactionCategoryId { get; set; }
-        public string TransactionCategoryName { get; set; }
+        public int StoreId { get; set; }
+        public string StoreName { get; set; }
+        public string StoreDetails { get; set; }
+        public Nullable<int> LocationId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
+        public virtual ICollection<DailyTransaction> DailyTransactions { get; set; }
+        public virtual PurchaseLocation PurchaseLocation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StoreInventory> StoreInventories { get; set; }
     }
 }

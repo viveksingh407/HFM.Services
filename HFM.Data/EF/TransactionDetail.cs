@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HFM.Data
+namespace HFM.Data.EF
 {
     using System;
     using System.Collections.Generic;
