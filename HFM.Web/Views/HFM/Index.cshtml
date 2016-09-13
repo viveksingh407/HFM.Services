@@ -20,11 +20,47 @@
     @foreach (var data in Model.FinanceTransactionDetails)
     {
         <tr>
-            <td>
-                @data.TransactionDetailsId
+            <td class="transactionReadOnlyDetails">
+                <table>
+                    <tr>
+                        <td>
+                            @data.TransactionDetailsId
+                        </td>
+                        <td>
+                            @data.TransactionDetailsName
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="transactionEditDetails hide" display="none">
+                <table>
+                    <tr>
+                        <td class="tdTransactionDetailId">
+                            @data.TransactionDetailsId
+                        </td>
+                        <td>
+                            <input type="text" class="txtTransactionDetailName" />
+                        </td>
+                    </tr>
+                </table>
             </td>
             <td>
-               @data.TransactionDetailsName
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" class="EditTransaction" value="Edit" />
+                        </td>
+                        <td>
+                            <input type="button" class="UpdateTransaction hide" value="Update" />
+                        </td>
+                        <td>
+                            <input type="button" class="DeleteTransaction hide" value="Delete" />
+                        </td>
+                        <td>
+                            <input type="button" class="CancelTransaction hide" value="Cancel" />
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     }

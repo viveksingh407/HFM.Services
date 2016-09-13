@@ -30,5 +30,32 @@ namespace HFM.Web.Models
                 TransactionDetailsName = n.TransactionDetailsName
             }).ToList();
         }
+
+        public void AddTransactionDetails(TransactionDetail detail)
+        {
+            details = new HFMTransactionDetails()
+            {
+                TransactionDetailsId = detail.TransactionDetailsId,
+                TransactionDetailsName = detail.TransactionDetailsName
+            };
+
+            details.AddTransactionDetails(details);
+        }
+
+        public void UpdateTransactionDetails(TransactionDetail detail)
+        {
+            details = new HFMTransactionDetails()
+            {
+                TransactionDetailsId = detail.TransactionDetailsId,
+                TransactionDetailsName = detail.TransactionDetailsName
+            };
+
+            details.UpdateTransactionDetails(details);
+        }
+
+        public void DeleteTransactionDetails(int id)
+        {
+            details.DeleteTransactionDetails(id);
+        }
     }
 }
