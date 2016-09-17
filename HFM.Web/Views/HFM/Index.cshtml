@@ -1,5 +1,28 @@
-﻿<div class="dvTransactionDetails">
-    @{
-        Html.RenderPartial("TransactionDetails");
-    }
+﻿<div class="container">
+    <div class="row">
+        <div id="dvAddItem" class="col-md-12">
+            @{
+                Html.RenderPartial("AddItems");
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div id="dvAddItemSubCategories" class="col-md-6">
+            @{
+                Html.RenderPartial("AddItemSubCategories");
+            }
+        </div>
+        <div id="dvAddItemCategories" class="col-md-6">
+            @{
+                Html.RenderPartial("AddItemCategories");
+            }
+        </div>
+    </div>
+    <div>
+        <div id="dvTransactionDetails" class="col-md-12">
+            @{
+                Html.RenderPartial("TransactionDetails");
+            }
+        </div>
+    </div>
 </div>

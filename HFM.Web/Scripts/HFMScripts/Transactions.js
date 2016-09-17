@@ -16,6 +16,10 @@ $(document).on('click', '.CancelTransaction', function () {
     hideButtons($(this));
 })
 
+$(document).on('click', '.AddTransaction', function () {
+    hideButtons($(this));
+})
+
 $(document).on('click', '.UpdateTransaction', function () {
     var parentRow = $(this).closest('table').closest('tr');
     var transactionDetailId = parentRow.find(".tdTransactionDetailId").html().trim();

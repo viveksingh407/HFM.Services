@@ -240,6 +240,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\HFM\Index.cshtml" />
     <Content Include="Views\HFM\TransactionDetails.cshtml" />
+    <Content Include="Views\HFM\AddItemCategories.cshtml" />
+    <Content Include="Views\HFM\AddItemSubCategories.cshtml" />
+    <Content Include="Views\HFM\AddItems.cshtml" />
+    <Content Include="Views\HFM\AddStores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
