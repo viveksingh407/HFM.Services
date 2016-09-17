@@ -79,7 +79,19 @@
     <Compile Include="EF\Inventory.cs">
       <DependentUpon>HFMDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Item.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ItemCategory.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ItemSubCategory.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\PurchaseLocation.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\QuantityType.cs">
       <DependentUpon>HFMDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Store.cs">

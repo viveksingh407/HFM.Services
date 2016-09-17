@@ -12,26 +12,17 @@ namespace HFM.Data.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Store
+    public partial class QuantityType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Store()
+        public QuantityType()
         {
-            this.DailyTransactions = new HashSet<DailyTransaction>();
-            this.StoreInventories = new HashSet<StoreInventory>();
             this.Items = new HashSet<Item>();
         }
     
-        public int StoreId { get; set; }
-        public string StoreName { get; set; }
-        public string StoreDetails { get; set; }
-        public Nullable<int> LocationId { get; set; }
+        public int QuantityTypeId { get; set; }
+        public string QuantityTypeName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DailyTransaction> DailyTransactions { get; set; }
-        public virtual PurchaseLocation PurchaseLocation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StoreInventory> StoreInventories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
     }

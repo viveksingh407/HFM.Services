@@ -24,6 +24,14 @@
         <AssociationConnector Association="HFMDBModel.FK__StoreInve__Store__4F47C5E3" ManuallyRouted="false" />
         <AssociationConnector Association="HFMDBModel.FK__Transacti__Trans__5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="HFMDBModel.FK__Transacti__Trans__5CD6CB2B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HFMDBModel.ItemCategory" Width="1.5" PointX="8" PointY="14.375" />
+        <EntityTypeShape EntityType="HFMDBModel.Item" Width="1.5" PointX="10.25" PointY="10.625" />
+        <EntityTypeShape EntityType="HFMDBModel.ItemSubCategory" Width="1.5" PointX="8" PointY="16.75" />
+        <EntityTypeShape EntityType="HFMDBModel.QuantityType" Width="1.5" PointX="8" PointY="12" />
+        <AssociationConnector Association="HFMDBModel.FK__Items__ItemCateg__681373AD" />
+        <AssociationConnector Association="HFMDBModel.FK__Items__ItemSubCa__690797E6" />
+        <AssociationConnector Association="HFMDBModel.FK__Items__QuantityI__6AEFE058" />
+        <AssociationConnector Association="HFMDBModel.FK__Items__StoreId__69FBBC1F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

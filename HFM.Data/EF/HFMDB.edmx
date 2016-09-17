@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HFMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HFMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DailyTransactions">
           <Key>
             <PropertyRef Name="DailyTransactionId" />
@@ -39,12 +39,44 @@
           <Property Name="InventoryName" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="InventoryDetails" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
+        <EntityType Name="ItemCategories">
+          <Key>
+            <PropertyRef Name="ItemCategoryId" />
+          </Key>
+          <Property Name="ItemCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCategoryName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="50" />
+          <Property Name="ItemCategoryId" Type="int" />
+          <Property Name="ItemSubCategoryId" Type="int" />
+          <Property Name="StoreId" Type="int" />
+          <Property Name="QuantityId" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemSubCategories">
+          <Key>
+            <PropertyRef Name="ItemSubCategoryId" />
+          </Key>
+          <Property Name="ItemSubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemSubCategoryName" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="PurchaseLocation">
           <Key>
             <PropertyRef Name="LocationId" />
           </Key>
           <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="LocationName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="QuantityTypes">
+          <Key>
+            <PropertyRef Name="QuantityTypeId" />
+          </Key>
+          <Property Name="QuantityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuantityTypeName" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="StoreInventory">
           <Key>
@@ -107,6 +139,54 @@
               <PropertyRef Name="StoreId" />
             </Principal>
             <Dependent Role="DailyTransactions">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemCateg__681373AD">
+          <End Role="ItemCategories" Type="Self.ItemCategories" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemSubCa__690797E6">
+          <End Role="ItemSubCategories" Type="Self.ItemSubCategories" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemSubCategories">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__QuantityI__6AEFE058">
+          <End Role="QuantityTypes" Type="Self.QuantityTypes" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityTypes">
+              <PropertyRef Name="QuantityTypeId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="QuantityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__StoreId__69FBBC1F">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="Items">
               <PropertyRef Name="StoreId" />
             </Dependent>
           </ReferentialConstraint>
@@ -212,7 +292,11 @@
           <EntitySet Name="ExpenseAmountType" EntityType="Self.ExpenseAmountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExpenseType" EntityType="Self.ExpenseType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemSubCategories" EntityType="Self.ItemSubCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PurchaseLocation" EntityType="Self.PurchaseLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuantityTypes" EntityType="Self.QuantityTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreInventory" EntityType="Self.StoreInventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionCategory" EntityType="Self.TransactionCategory" Schema="dbo" store:Type="Tables" />
@@ -221,6 +305,22 @@
           <AssociationSet Name="FK__DailyTran__Store__540C7B00" Association="Self.FK__DailyTran__Store__540C7B00">
             <End Role="Stores" EntitySet="Stores" />
             <End Role="DailyTransactions" EntitySet="DailyTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemCateg__681373AD" Association="Self.FK__Items__ItemCateg__681373AD">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemSubCa__690797E6" Association="Self.FK__Items__ItemSubCa__690797E6">
+            <End Role="ItemSubCategories" EntitySet="ItemSubCategories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__QuantityI__6AEFE058" Association="Self.FK__Items__QuantityI__6AEFE058">
+            <End Role="QuantityTypes" EntitySet="QuantityTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__StoreId__69FBBC1F" Association="Self.FK__Items__StoreId__69FBBC1F">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FK__StoreInve__Inven__503BEA1C" Association="Self.FK__StoreInve__Inven__503BEA1C">
             <End Role="Inventory" EntitySet="Inventory" />
@@ -255,8 +355,7 @@
             <End Role="TransactionDetails" EntitySet="TransactionDetails" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HFMDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -337,6 +436,7 @@
           <NavigationProperty Name="DailyTransactions" Relationship="Self.FK__DailyTran__Store__540C7B00" FromRole="Stores" ToRole="DailyTransactions" />
           <NavigationProperty Name="PurchaseLocation" Relationship="Self.FK__Stores__Location__4C6B5938" FromRole="Stores" ToRole="PurchaseLocation" />
           <NavigationProperty Name="StoreInventories" Relationship="Self.FK__StoreInve__Store__4F47C5E3" FromRole="Stores" ToRole="StoreInventory" />
+          <NavigationProperty Name="Items" Relationship="HFMDBModel.FK__Items__StoreId__69FBBC1F" FromRole="Store" ToRole="Item" />
         </EntityType>
         <EntityType Name="TransactionCategory">
           <Key>
@@ -527,7 +627,114 @@
             <End Role="TransactionType" EntitySet="TransactionTypes" />
             <End Role="TransactionDetails" EntitySet="TransactionDetails" />
           </AssociationSet>
+          <EntitySet Name="ItemCategories" EntityType="HFMDBModel.ItemCategory" />
+          <EntitySet Name="Items" EntityType="HFMDBModel.Item" />
+          <EntitySet Name="ItemSubCategories" EntityType="HFMDBModel.ItemSubCategory" />
+          <EntitySet Name="QuantityTypes" EntityType="HFMDBModel.QuantityType" />
+          <AssociationSet Name="FK__Items__ItemCateg__681373AD" Association="HFMDBModel.FK__Items__ItemCateg__681373AD">
+            <End Role="ItemCategory" EntitySet="ItemCategories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemSubCa__690797E6" Association="HFMDBModel.FK__Items__ItemSubCa__690797E6">
+            <End Role="ItemSubCategory" EntitySet="ItemSubCategories" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__QuantityI__6AEFE058" Association="HFMDBModel.FK__Items__QuantityI__6AEFE058">
+            <End Role="QuantityType" EntitySet="QuantityTypes" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__StoreId__69FBBC1F" Association="HFMDBModel.FK__Items__StoreId__69FBBC1F">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Item" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ItemCategory">
+          <Key>
+            <PropertyRef Name="ItemCategoryId" />
+          </Key>
+          <Property Name="ItemCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="HFMDBModel.FK__Items__ItemCateg__681373AD" FromRole="ItemCategory" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCategoryId" Type="Int32" />
+          <Property Name="ItemSubCategoryId" Type="Int32" />
+          <Property Name="StoreId" Type="Int32" />
+          <Property Name="QuantityId" Type="Int32" />
+          <NavigationProperty Name="ItemCategory" Relationship="HFMDBModel.FK__Items__ItemCateg__681373AD" FromRole="Item" ToRole="ItemCategory" />
+          <NavigationProperty Name="ItemSubCategory" Relationship="HFMDBModel.FK__Items__ItemSubCa__690797E6" FromRole="Item" ToRole="ItemSubCategory" />
+          <NavigationProperty Name="QuantityType" Relationship="HFMDBModel.FK__Items__QuantityI__6AEFE058" FromRole="Item" ToRole="QuantityType" />
+          <NavigationProperty Name="Store" Relationship="HFMDBModel.FK__Items__StoreId__69FBBC1F" FromRole="Item" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="ItemSubCategory">
+          <Key>
+            <PropertyRef Name="ItemSubCategoryId" />
+          </Key>
+          <Property Name="ItemSubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemSubCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="HFMDBModel.FK__Items__ItemSubCa__690797E6" FromRole="ItemSubCategory" ToRole="Item" />
+        </EntityType>
+        <EntityType Name="QuantityType">
+          <Key>
+            <PropertyRef Name="QuantityTypeId" />
+          </Key>
+          <Property Name="QuantityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuantityTypeName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="HFMDBModel.FK__Items__QuantityI__6AEFE058" FromRole="QuantityType" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK__Items__ItemCateg__681373AD">
+          <End Type="HFMDBModel.ItemCategory" Role="ItemCategory" Multiplicity="0..1" />
+          <End Type="HFMDBModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategory">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemSubCa__690797E6">
+          <End Type="HFMDBModel.ItemSubCategory" Role="ItemSubCategory" Multiplicity="0..1" />
+          <End Type="HFMDBModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemSubCategory">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__QuantityI__6AEFE058">
+          <End Type="HFMDBModel.QuantityType" Role="QuantityType" Multiplicity="0..1" />
+          <End Type="HFMDBModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityType">
+              <PropertyRef Name="QuantityTypeId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="QuantityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__StoreId__69FBBC1F">
+          <End Type="HFMDBModel.Store" Role="Store" Multiplicity="0..1" />
+          <End Type="HFMDBModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -635,6 +842,42 @@
                 <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
                 <ScalarProperty Name="TransactionTypeName" ColumnName="TransactionTypeName" />
                 <ScalarProperty Name="TransactionTypeCode" ColumnName="TransactionTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCategories">
+            <EntityTypeMapping TypeName="HFMDBModel.ItemCategory">
+              <MappingFragment StoreEntitySet="ItemCategories">
+                <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="HFMDBModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="QuantityId" ColumnName="QuantityId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="ItemSubCategoryId" ColumnName="ItemSubCategoryId" />
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemSubCategories">
+            <EntityTypeMapping TypeName="HFMDBModel.ItemSubCategory">
+              <MappingFragment StoreEntitySet="ItemSubCategories">
+                <ScalarProperty Name="ItemSubCategoryName" ColumnName="ItemSubCategoryName" />
+                <ScalarProperty Name="ItemSubCategoryId" ColumnName="ItemSubCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuantityTypes">
+            <EntityTypeMapping TypeName="HFMDBModel.QuantityType">
+              <MappingFragment StoreEntitySet="QuantityTypes">
+                <ScalarProperty Name="QuantityTypeName" ColumnName="QuantityTypeName" />
+                <ScalarProperty Name="QuantityTypeId" ColumnName="QuantityTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

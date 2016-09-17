@@ -35,5 +35,9 @@ namespace HFM.Data.EF
         public virtual DbSet<TransactionCategory> TransactionCategories { get; set; }
         public virtual DbSet<TransactionDetail> TransactionDetails { get; set; }
         public virtual DbSet<TransactionType> TransactionTypes { get; set; }
+        public virtual DbSet<ItemCategory> ItemCategories { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<ItemSubCategory> ItemSubCategories { get; set; }
+        public virtual DbSet<QuantityType> QuantityTypes { get; set; }
     }
 }
