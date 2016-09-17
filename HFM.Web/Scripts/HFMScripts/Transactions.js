@@ -1,4 +1,4 @@
-﻿$('.EditTransaction').click(function () {
+﻿$(document).on('click', '.EditTransaction', function () {
     var editButton = $(this);
     var closestParentTable = editButton.closest('table');
     var closestParentRow = editButton.closest('table').closest('tr');
@@ -12,14 +12,15 @@
     closestParentRow.find('.transactionEditDetails').removeClass('hide');
 })
 
-$('.CancelTransaction').click(function () {
+$(document).on('click', '.CancelTransaction', function () {
     hideButtons($(this));
 })
 
-$('.UpdateTransaction').click(function () {
+$(document).on('click', '.UpdateTransaction', function () {
     var parentRow = $(this).closest('table').closest('tr');
     var transactionDetailId = parentRow.find(".tdTransactionDetailId").html().trim();
     var transactionDetailName = parentRow.find(".txtTransactionDetailName").val();
+    var updateButton = $(this);
 
     var url = 'update';
 
@@ -27,17 +28,18 @@ $('.UpdateTransaction').click(function () {
         type: "POST",
         url: url,
         data: { 'TransactionDetailsId': transactionDetailId, 'TransactionDetailsName': transactionDetailName },
-        success: function (html) {
-            hideButtons($(this));
-            alert('Update successful.')
+        success: function (data) {
+            hideButtons(updateButton);
+            alert('Update successful.');
+            $('.dvTransactionDetails').html(data);
         },
-        failure: function (html) {
-            alert('Update failed.')
+        failure: function (jqXHR, textStatus, error) {
+            console.log("Post error: " + error);
         }
     });
 })
 
-$('.DeleteTransaction').click(function () {
+$(document).on('click', '.DeleteTransaction', function () {
     alert('Deleting..');
 })
 
@@ -47,8 +49,8 @@ function hideButtons(clickedButton) {
 
     closestParentTable.find('.UpdateTransaction').addClass('hide');
     closestParentTable.find('.DeleteTransaction').addClass('hide');
+    closestParentTable.find('.CancelTransaction').addClass('hide');
     closestParentTable.find('.EditTransaction').removeClass('hide');
-    clickedButton.addClass('hide');
 
     closestParentRow.find('.transactionReadOnlyDetails').removeClass('hide');
     closestParentRow.find('.transactionEditDetails').addClass('hide');

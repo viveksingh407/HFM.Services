@@ -9,12 +9,12 @@ namespace HFM.Web.Controllers
 {
     public class HFMController : Controller
     {
+        TransactionDetails details;
+
         // GET: HFM
         public ActionResult Index()
         {
-            TransactionDetails details = new TransactionDetails();
-
-            details.GetTransactionDetails();
+            this.GetTransactionDetails();
             return View(details);
         }
 
@@ -26,19 +26,27 @@ namespace HFM.Web.Controllers
         }
 
         [HttpPost]
-        public string Update(TransactionDetail detail)
+        public ActionResult Update(TransactionDetail detail)
         {
-            TransactionDetail transactionDetail = new TransactionDetail();
-            transactionDetail.UpdateTransactionDetails(detail);
+            var transactionDetails = new TransactionDetail();
+            transactionDetails.UpdateTransactionDetails(detail);
 
-            return "Sucess";
+            this.GetTransactionDetails();
+            
+            return PartialView("TransactionDetails", details);
         }
 
         [HttpDelete]
         public void Delete(int transactionId)
         {
-            TransactionDetail detail = new TransactionDetail();
-            detail.DeleteTransactionDetails(transactionId);
+            var transactionDetails = new TransactionDetail();
+            transactionDetails.DeleteTransactionDetails(transactionId);
+        }
+
+        private void GetTransactionDetails()
+        {
+            details = new TransactionDetails();
+            details.GetTransactionDetails();
         }
     }
 }
