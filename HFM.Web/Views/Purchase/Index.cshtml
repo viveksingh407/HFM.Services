@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div class="row">
+        <h2>Items</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <div>
+                <span>Item Name:</span>
+            </div>
+            <div>
+                <input type="text" id="txtItemName" />
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <span>Item Sub Category:</span>
+            </div>
+            <div>
+                <select id="selectItemSubCategory">
+                    <option value="1" selected>--Selected Value--</option>
+                    <option value="2">Car</option>
+                    <option value="3">Dairy</option>
+                    <option value="4">Dal</option>
+                    <option value="5">Flour</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <span>Item Category:</span>
+            </div>
+            <div>
+                <select id="selectItemCategory">
+                    <option value="1" selected>--Selected Value--</option>
+                    <option value="2">Food</option>
+                    <option value="3">Shopping</option>
+                    <option value="4">Bill</option>
+                    <option value="5">Subsciptions</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <span>Store:</span>
+            </div>
+            <div>
+                <select id="selectStores">
+                    <option value="1" selected>--Selected Value--</option>
+                    <option value="2">Fred Meyers</option>
+                    <option value="3">DK</option>
+                    <option value="4">Indian SuperMarket</option>
+                    <option value="5">Costco</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div>
+                <span>Quantity:</span>
+            </div>
+            <div>
+                <input type="text" />
+            </div>
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div>
+            <input type="button" value="Add Item" />
+        </div>
+    </div>
+</div>
+
