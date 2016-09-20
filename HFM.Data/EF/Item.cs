@@ -14,6 +14,12 @@ namespace HFM.Data.EF
     
     public partial class Item
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Item()
+        {
+            this.DailyPurchases = new HashSet<DailyPurchase>();
+        }
+    
         public int ItemId { get; set; }
         public string ItemName { get; set; }
         public Nullable<int> ItemCategoryId { get; set; }
@@ -25,5 +31,7 @@ namespace HFM.Data.EF
         public virtual ItemSubCategory ItemSubCategory { get; set; }
         public virtual QuantityType QuantityType { get; set; }
         public virtual Store Store { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DailyPurchase> DailyPurchases { get; set; }
     }
 }

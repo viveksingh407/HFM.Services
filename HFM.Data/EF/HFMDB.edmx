@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HFMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DailyPurchase">
+          <Key>
+            <PropertyRef Name="DailyPurchaseId" />
+          </Key>
+          <Property Name="DailyPurchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchasedItemId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="DailyTransactions">
           <Key>
             <PropertyRef Name="DailyTransactionId" />
@@ -132,6 +144,18 @@
           <Property Name="TransactionTypeName" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TransactionTypeCode" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
+        <Association Name="FK__DailyPurc__Purch__1B9317B3">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="DailyPurchase" Type="Self.DailyPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="DailyPurchase">
+              <PropertyRef Name="PurchasedItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DailyTran__Store__540C7B00">
           <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
           <End Role="DailyTransactions" Type="Self.DailyTransactions" Multiplicity="*" />
@@ -301,6 +325,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HFMDBModelStoreContainer">
+          <EntitySet Name="DailyPurchase" EntityType="Self.DailyPurchase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DailyTransactions" EntityType="Self.DailyTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExpenseAmountType" EntityType="Self.ExpenseAmountType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExpenseType" EntityType="Self.ExpenseType" Schema="dbo" store:Type="Tables" />
@@ -315,6 +340,10 @@
           <EntitySet Name="TransactionCategory" EntityType="Self.TransactionCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DailyPurc__Purch__1B9317B3" Association="Self.FK__DailyPurc__Purch__1B9317B3">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="DailyPurchase" EntitySet="DailyPurchase" />
+          </AssociationSet>
           <AssociationSet Name="FK__DailyTran__Store__540C7B00" Association="Self.FK__DailyTran__Store__540C7B00">
             <End Role="Stores" EntitySet="Stores" />
             <End Role="DailyTransactions" EntitySet="DailyTransactions" />
@@ -672,6 +701,11 @@
             <End Role="ItemCategory" EntitySet="ItemCategories" />
             <End Role="ItemSubCategory" EntitySet="ItemSubCategories" />
           </AssociationSet>
+          <EntitySet Name="DailyPurchases" EntityType="HFMDBModel.DailyPurchase" />
+          <AssociationSet Name="FK__DailyPurc__Purch__1B9317B3" Association="HFMDBModel.FK__DailyPurc__Purch__1B9317B3">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="DailyPurchase" EntitySet="DailyPurchases" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ItemCategory">
           <Key>
@@ -697,6 +731,7 @@
           <NavigationProperty Name="ItemSubCategory" Relationship="HFMDBModel.FK__Items__ItemSubCa__690797E6" FromRole="Item" ToRole="ItemSubCategory" />
           <NavigationProperty Name="QuantityType" Relationship="HFMDBModel.FK__Items__QuantityI__6AEFE058" FromRole="Item" ToRole="QuantityType" />
           <NavigationProperty Name="Store" Relationship="HFMDBModel.FK__Items__StoreId__69FBBC1F" FromRole="Item" ToRole="Store" />
+          <NavigationProperty Name="DailyPurchases" Relationship="HFMDBModel.FK__DailyPurc__Purch__1B9317B3" FromRole="Item" ToRole="DailyPurchase" />
         </EntityType>
         <EntityType Name="ItemSubCategory">
           <Key>
@@ -786,6 +821,31 @@
             </Principal>
             <Dependent Role="ItemSubCategory">
               <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DailyPurchase">
+          <Key>
+            <PropertyRef Name="DailyPurchaseId" />
+          </Key>
+          <Property Name="DailyPurchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchasedItemId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="HFMDBModel.FK__DailyPurc__Purch__1B9317B3" FromRole="DailyPurchase" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK__DailyPurc__Purch__1B9317B3">
+          <End Type="HFMDBModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="HFMDBModel.DailyPurchase" Role="DailyPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="DailyPurchase">
+              <PropertyRef Name="PurchasedItemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -933,6 +993,19 @@
               <MappingFragment StoreEntitySet="QuantityTypes">
                 <ScalarProperty Name="QuantityTypeName" ColumnName="QuantityTypeName" />
                 <ScalarProperty Name="QuantityTypeId" ColumnName="QuantityTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyPurchases">
+            <EntityTypeMapping TypeName="HFMDBModel.DailyPurchase">
+              <MappingFragment StoreEntitySet="DailyPurchase">
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PurchasedItemId" ColumnName="PurchasedItemId" />
+                <ScalarProperty Name="DailyPurchaseId" ColumnName="DailyPurchaseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

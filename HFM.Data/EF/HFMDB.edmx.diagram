@@ -34,6 +34,8 @@
         <AssociationConnector Association="HFMDBModel.FK__Items__StoreId__69FBBC1F" />
         <AssociationConnector Association="HFMDBModel.FK__ItemSubCa__ItemC__73852659" />
         <AssociationConnector Association="HFMDBModel.FK__ItemSubCa__ItemC__0697FACD" />
+        <EntityTypeShape EntityType="HFMDBModel.DailyPurchase" Width="1.5" PointX="12.5" PointY="10.875" />
+        <AssociationConnector Association="HFMDBModel.FK__DailyPurc__Purch__1B9317B3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

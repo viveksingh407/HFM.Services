@@ -26,3 +26,14 @@ CREATE TABLE Items (
 	QuantityId INT REFERENCES QuantityTypes(QuantityTypeId),
 )
 
+CREATE TABLE DailyPurchase
+(
+	DailyPurchaseId INT IDENTITY(1, 1) PRIMARY KEY,
+	PurchasedItemId INT REFERENCES Items(ItemId) NOT NULL,
+	Price DECIMAL(5, 2) NOT NULL,
+	Quantity DECIMAL(5, 2) NOT NULL,
+	PurchaseDate DATETIME,
+	ModifiedDate DATETIME,
+	CreatedDate DATETIME,
+)
+
