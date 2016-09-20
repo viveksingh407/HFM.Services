@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HFM.Business.Data;
 
 namespace HFM.Web.Models
 {
@@ -21,10 +22,16 @@ namespace HFM.Web.Models
 
         public DateTime PurchaseDate { get; set; }
 
-        public ItemModel GetItemModel()
+        public IList<ItemModel> GetItemModel()
         {
-            var data = new ItemModel();
-            return data;
+            var item = new Item();
+            var items = item.GetItems();
+
+            return items.Select(n => new ItemModel()
+            {
+                ItemId = n.ItemId,
+                ItemName = n.ItemName
+            }).ToList();
         }
 
         //private ItemModel GetItemModelData()

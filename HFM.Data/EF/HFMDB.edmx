@@ -63,6 +63,7 @@
           </Key>
           <Property Name="ItemSubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ItemSubCategoryName" Type="varchar" MaxLength="50" />
+          <Property Name="ItemCategoryId" Type="int" />
         </EntityType>
         <EntityType Name="PurchaseLocation">
           <Key>
@@ -188,6 +189,18 @@
             </Principal>
             <Dependent Role="Items">
               <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubCa__ItemC__0697FACD">
+          <End Role="ItemCategories" Type="Self.ItemCategories" Multiplicity="0..1" />
+          <End Role="ItemSubCategories" Type="Self.ItemSubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemSubCategories">
+              <PropertyRef Name="ItemCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -321,6 +334,10 @@
           <AssociationSet Name="FK__Items__StoreId__69FBBC1F" Association="Self.FK__Items__StoreId__69FBBC1F">
             <End Role="Stores" EntitySet="Stores" />
             <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemSubCa__ItemC__0697FACD" Association="Self.FK__ItemSubCa__ItemC__0697FACD">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="ItemSubCategories" EntitySet="ItemSubCategories" />
           </AssociationSet>
           <AssociationSet Name="FK__StoreInve__Inven__503BEA1C" Association="Self.FK__StoreInve__Inven__503BEA1C">
             <End Role="Inventory" EntitySet="Inventory" />
@@ -647,6 +664,14 @@
             <End Role="Store" EntitySet="Stores" />
             <End Role="Item" EntitySet="Items" />
           </AssociationSet>
+          <AssociationSet Name="FK__ItemSubCa__ItemC__73852659" Association="HFMDBModel.FK__ItemSubCa__ItemC__73852659">
+            <End Role="ItemCategory" EntitySet="ItemCategories" />
+            <End Role="ItemSubCategory" EntitySet="ItemSubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemSubCa__ItemC__0697FACD" Association="HFMDBModel.FK__ItemSubCa__ItemC__0697FACD">
+            <End Role="ItemCategory" EntitySet="ItemCategories" />
+            <End Role="ItemSubCategory" EntitySet="ItemSubCategories" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ItemCategory">
           <Key>
@@ -655,6 +680,8 @@
           <Property Name="ItemCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Items" Relationship="HFMDBModel.FK__Items__ItemCateg__681373AD" FromRole="ItemCategory" ToRole="Item" />
+          <NavigationProperty Name="ItemSubCategories" Relationship="HFMDBModel.FK__ItemSubCa__ItemC__73852659" FromRole="ItemCategory" ToRole="ItemSubCategory" />
+          <NavigationProperty Name="ItemSubCategories1" Relationship="HFMDBModel.FK__ItemSubCa__ItemC__0697FACD" FromRole="ItemCategory" ToRole="ItemSubCategory" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -678,6 +705,9 @@
           <Property Name="ItemSubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemSubCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Items" Relationship="HFMDBModel.FK__Items__ItemSubCa__690797E6" FromRole="ItemSubCategory" ToRole="Item" />
+          <NavigationProperty Name="ItemCategory1" Relationship="HFMDBModel.FK__ItemSubCa__ItemC__73852659" FromRole="ItemSubCategory" ToRole="ItemCategory" />
+          <Property Name="ItemCategoryId" Type="Int32" />
+          <NavigationProperty Name="ItemCategory2" Relationship="HFMDBModel.FK__ItemSubCa__ItemC__0697FACD" FromRole="ItemSubCategory" ToRole="ItemCategory" />
         </EntityType>
         <EntityType Name="QuantityType">
           <Key>
@@ -732,6 +762,30 @@
             </Principal>
             <Dependent Role="Item">
               <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubCa__ItemC__73852659">
+          <End Type="HFMDBModel.ItemCategory" Role="ItemCategory" Multiplicity="0..1" />
+          <End Type="HFMDBModel.ItemSubCategory" Role="ItemSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategory">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemSubCategory">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubCa__ItemC__0697FACD">
+          <End Type="HFMDBModel.ItemCategory" Role="ItemCategory" Multiplicity="0..1" />
+          <End Type="HFMDBModel.ItemSubCategory" Role="ItemSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategory">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemSubCategory">
+              <PropertyRef Name="ItemCategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -868,6 +922,7 @@
           <EntitySetMapping Name="ItemSubCategories">
             <EntityTypeMapping TypeName="HFMDBModel.ItemSubCategory">
               <MappingFragment StoreEntitySet="ItemSubCategories">
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
                 <ScalarProperty Name="ItemSubCategoryName" ColumnName="ItemSubCategoryName" />
                 <ScalarProperty Name="ItemSubCategoryId" ColumnName="ItemSubCategoryId" />
               </MappingFragment>

@@ -32,6 +32,8 @@
         <AssociationConnector Association="HFMDBModel.FK__Items__ItemSubCa__690797E6" />
         <AssociationConnector Association="HFMDBModel.FK__Items__QuantityI__6AEFE058" />
         <AssociationConnector Association="HFMDBModel.FK__Items__StoreId__69FBBC1F" />
+        <AssociationConnector Association="HFMDBModel.FK__ItemSubCa__ItemC__73852659" />
+        <AssociationConnector Association="HFMDBModel.FK__ItemSubCa__ItemC__0697FACD" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

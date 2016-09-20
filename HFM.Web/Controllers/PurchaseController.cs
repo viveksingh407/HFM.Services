@@ -15,22 +15,54 @@ namespace HFM.Web.Controllers
             return View();
         }
 
+        [HttpGet]
         public JsonResult GetItems(string query)
         {
-            //var data = new string[] { "One", "Two", "Three", "Four"};
-            var data = this.GetTransactionDetails();
+            var data = this.GetItems();
             string[] filteredData;
 
             if (!string.IsNullOrEmpty(query))
             {
-                filteredData = data.Where(n => n.StartsWith(query, StringComparison.InvariantCultureIgnoreCase)).ToArray();
+                filteredData = data
+                    .Where(n => n.ItemName.StartsWith(query, StringComparison.InvariantCultureIgnoreCase))
+                    .Select(n => n.ItemName)
+                    .ToArray();
             }
             else
             {
-                filteredData = data;
+                filteredData = data.Select(n => n.ItemName).ToArray();
             }
 
             return new JsonResult() { Data = filteredData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [HttpGet]
+        public JsonResult GetCategoryFromSubCategory(int subCategoryId)
+        {
+            var data = this.GetItemCategories(subCategoryId);
+            var categoryData = new KeyValuePair<int, string>();
+
+            if (data != null)
+            {
+                categoryData = new KeyValuePair<int, string>(data.ItemCategoryId, data.ItemCategoryName);
+            }
+
+            //categoryData = new KeyValuePair<int, string>(1, "Test1");
+            return new JsonResult() { Data = categoryData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [HttpGet]
+        public JsonResult GeSubCategoryFromItemId(int itemId)
+        {
+            var data = this.GetItemSubCategories(itemId);
+            var subCategoryData = new KeyValuePair<int, string>();
+
+            if (data != null)
+            {
+                subCategoryData = new KeyValuePair<int, string>(data.ItemSubCategoryId, data.ItemSubCategoryName);
+            }
+
+            return new JsonResult() { Data = subCategoryData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         private string[] GetTransactionDetails()
@@ -39,6 +71,27 @@ namespace HFM.Web.Controllers
             details.GetTransactionDetails();
 
             return details.FinanceTransactionDetails.Select(n => n.TransactionDetailsName).ToArray();
+        }
+
+        private ItemCategoryModel GetItemCategories(int subCategoryId)
+        {
+            var data = new ItemCategoryModel();
+
+            //return new ItemCategoryModel() { ItemCategoryId = 1, ItemCategoryName = "Test1" };
+
+            return data.GetItemCategoryModel(subCategoryId);
+        }
+
+        private ItemSubCategoryModel GetItemSubCategories(int itemId)
+        {
+            var data = new ItemSubCategoryModel();
+            return data.GetItemCategoryModel(itemId);
+        }
+
+        private IList<ItemModel> GetItems()
+        {
+            var data = new ItemModel();
+            return data.GetItemModel();
         }
     }
 }

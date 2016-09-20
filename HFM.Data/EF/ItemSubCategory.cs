@@ -22,8 +22,11 @@ namespace HFM.Data.EF
     
         public int ItemSubCategoryId { get; set; }
         public string ItemSubCategoryName { get; set; }
+        public Nullable<int> ItemCategoryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Items { get; set; }
+        public virtual ItemCategory ItemCategory1 { get; set; }
+        public virtual ItemCategory ItemCategory2 { get; set; }
     }
 }

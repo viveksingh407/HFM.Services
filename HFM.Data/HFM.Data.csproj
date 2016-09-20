@@ -114,6 +114,9 @@
     <Compile Include="Repository\IHFMRepository.cs" />
     <Compile Include="Repository\Implementation\ExpenseAmountTypeRepository.cs" />
     <Compile Include="Repository\Implementation\ExpenseTypeRepository.cs" />
+    <Compile Include="Repository\Implementation\ItemsCategoryRepository.cs" />
+    <Compile Include="Repository\Implementation\ItemsRepository.cs" />
+    <Compile Include="Repository\Implementation\ItemSubCategoryRepository.cs" />
     <Compile Include="Repository\Implementation\TransactionCategoryRepository.cs" />
     <Compile Include="Repository\Implementation\TransactionDetailsRepository.cs" />
     <Compile Include="Repository\Implementation\TransactionTypeRepository.cs" />

@@ -13,7 +13,8 @@ CREATE TABLE ItemCategories (
 
 CREATE TABLE ItemSubCategories (
 	ItemSubCategoryId INT IDENTITY(1, 1) PRIMARY KEY,
-	ItemSubCategoryName VARCHAR(50)
+	ItemSubCategoryName VARCHAR(50),
+	ItemCategoryId INT REFERENCES ItemCategories(ItemCategoryId)
 )
 
 CREATE TABLE Items (
