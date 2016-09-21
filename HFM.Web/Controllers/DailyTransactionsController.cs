@@ -49,14 +49,14 @@ namespace HFM.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult AddDailyTransaction(DailyTransactionsModel data)
+        public ActionResult AddDailyTransaction(DailyTransactionsModel data)
         {
             DailyTransactionsModel model = new DailyTransactionsModel();
             model.AddDailyTransaction(data);
+
             var transactions = model.GetDailyTransactions(DateTime.Today);
-            var serializedTransactionData = JsonConvert.SerializeObject(transactions);
-            
-            return new JsonResult() { Data = serializedTransactionData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+
+            return PartialView("Items", transactions);
         }
     }
 }

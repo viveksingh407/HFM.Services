@@ -19,18 +19,18 @@ namespace HFM.Web.Controllers
         public JsonResult GetItems(string query)
         {
             var data = this.GetItems();
-            string[] filteredData;
+            IList<KeyValuePair<int, string>> filteredData;
 
             if (!string.IsNullOrEmpty(query))
             {
                 filteredData = data
                     .Where(n => n.ItemName.StartsWith(query, StringComparison.InvariantCultureIgnoreCase))
-                    .Select(n => n.ItemName)
-                    .ToArray();
+                    .Select(n => new KeyValuePair<int, string>(n.ItemId, n.ItemName))
+                    .ToList();
             }
             else
             {
-                filteredData = data.Select(n => n.ItemName).ToArray();
+                filteredData = data.Select(n => new KeyValuePair<int, string>(n.ItemId, n.ItemName)).ToList();
             }
 
             return new JsonResult() { Data = filteredData, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

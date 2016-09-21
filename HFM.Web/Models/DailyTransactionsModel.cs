@@ -57,7 +57,7 @@ namespace HFM.Web.Models
                 Price = dailyTransaction.Price,
                 Quantity = dailyTransaction.Quantity,
                 PurchaseDate = dailyTransaction.PurchaseDate,
-                ModifiedDate = dailyTransaction.ModifiedDate
+                ModifiedDate = dailyTransaction.ModifiedDate == DateTime.MinValue ? DateTime.Now : dailyTransaction.ModifiedDate
             });
 
             return isSaveSuccessful;

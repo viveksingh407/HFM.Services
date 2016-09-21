@@ -8,7 +8,8 @@
                 <span>Item Name:</span>
             </div>
             <div>
-                <input type="text" id="txtItemName" />
+                <input id="hdnDailyPurchaseItemId" type="hidden" />
+                <input type="text" id="dailyPurchaseItemName" />
             </div>
         </div>
         <div id="categoryGroup" class="hide">
@@ -42,7 +43,7 @@
                 <span>Price:</span>
             </div>
             <div>
-                <input type="text" />
+                <input type="text" id="dailyPurchasePrice" />
             </div>
         </div>
         <div class="col-md-2">
@@ -50,7 +51,7 @@
                 <span>Quantity:</span>
             </div>
             <div>
-                <input type="text" />
+                <input type="text" id="dailyPurchaseQuantity" />
             </div>
         </div>
         <div class="col-md-2">
@@ -58,12 +59,12 @@
                 <span>Purchase Date:</span>
             </div>
             <div>
-                <input type="date" id="purchaseDate" />
+                <input type="date" id="dailyPurchaseDate" />
             </div>
         </div>
         <div class="col-md-2">
             <div>
-                <input type="button" value="Add Item" />
+                <input type="button" id="btnDailyPurchaseItem" value="Add Item" />
             </div>
         </div>
     </div>
