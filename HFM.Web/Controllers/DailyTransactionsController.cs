@@ -13,7 +13,9 @@ namespace HFM.Web.Controllers
         // GET: DailyTransactions
         public ActionResult Index()
         {
-            return View();
+            DailyTransactionsModel model = new DailyTransactionsModel();
+            var data = model.GetDailyTransactions();
+            return View(data);
         }
 
         [HttpGet]

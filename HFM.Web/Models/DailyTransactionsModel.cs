@@ -10,11 +10,20 @@ namespace HFM.Web.Models
     {
         public int DailyPurchaseId { get; set; }
         public int PurchasedItemId { get; set; }
+        public string PurchasedItemName { get; set; }
         public decimal Price { get; set; }
         public decimal Quantity { get; set; }
+        public int StoreId { get; set; }
+        public string StoreName { get; set; }
+        public int StoreLocationId { get; set; }
+        public string StoreLocation { get; set; }
+        public int ItemSubCategoryId { get; set; }
+        public string ItemSubCategoryName { get; set; }
+        public int ItemCategoryId { get; set; }
+        public string ItemCategoryName { get; set; }
         public DateTime PurchaseDate { get; set; }
-        public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public IList<DailyTransactionsModel> GetDailyTransactions()
         {
@@ -83,8 +92,17 @@ namespace HFM.Web.Models
             {
                 DailyPurchaseId = n.PurchasedItemId,
                 PurchasedItemId = n.PurchasedItemId,
+                PurchasedItemName = n.PurchasedItemName,
                 Price = n.Price,
                 Quantity = n.Quantity,
+                ItemSubCategoryId = n.ItemSubCategoryId,
+                ItemSubCategoryName = n.ItemSubCategoryName,
+                ItemCategoryId = n.ItemCategoryId,
+                ItemCategoryName = n.ItemCategoryName,
+                StoreId = n.StoreId,
+                StoreName = n.StoreName,
+                StoreLocationId = n.StoreLocationId,
+                StoreLocation = n.StoreLocation,
                 PurchaseDate = n.PurchaseDate,
                 CreatedDate = n.CreatedDate,
                 ModifiedDate = n.ModifiedDate

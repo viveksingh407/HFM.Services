@@ -1,0 +1,106 @@
+﻿@using HFM.Web.Models;
+
+@model IList<DailyTransactionsModel>
+
+<table>
+    <tr>
+        <th class="hide">
+            DailyPurchaseId
+        </th>
+        <th class="hide">
+            PurchasedItemId
+        </th>
+        <th>
+            Purchased Item Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th class="hide">
+            ItemSubCategoryId
+        </th>
+        <th>
+            ItemSubCategoryName
+        </th>
+        <th class="hide">
+            ItemCategoryId
+        </th>
+        <th>
+            ItemCategoryName
+        </th>
+        <th class="hide">
+            StoreId
+        </th>
+        <th>
+            StoreName
+        </th>
+        <th class="hide">
+            StoreLocationId
+        </th>
+        <th>
+            StoreLocation
+        </th>
+        <th>
+            PurchaseDate
+        </th>
+    </tr>
+    @foreach (var data in Model)
+    {
+        <tr>
+            <td class="hide">
+                @data.DailyPurchaseId
+            </td>
+            <td class="hide">
+                @data.PurchasedItemId
+            </td>
+            <td>
+                @data.PurchasedItemName
+            </td>
+            <td>
+                @data.Price
+            </td>
+            <td>
+                @data.Quantity
+            </td>
+            <td class="hide">
+                @data.ItemSubCategoryId
+            </td>
+            <td>
+                @data.ItemSubCategoryName
+            </td>
+            <td class="hide">
+                @data.ItemCategoryId
+            </td>
+            <td>
+                @data.ItemCategoryName
+            </td>
+            <td class="hide">
+                @data.StoreId
+            </td>
+            <td>
+                @data.StoreName
+            </td>
+            <td class="hide">
+                @data.StoreLocationId
+            </td>
+            <td>
+                @data.StoreLocation
+            </td>
+            <td>
+                @data.PurchaseDate
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" class="DeleteTransaction" value="Delete" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    }
+</table>
