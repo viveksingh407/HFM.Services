@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using HFM.Web.Models;
+using HFM.Business.Utilities;
 
 namespace HFM.Web.Controllers
 {
@@ -15,6 +16,7 @@ namespace HFM.Web.Controllers
         {
             DailyTransactionsModel model = new DailyTransactionsModel();
             var data = model.GetDailyTransactions();
+            FileReader.FileQuery();
             return View(data);
         }
 
