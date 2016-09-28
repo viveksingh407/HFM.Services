@@ -5,6 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HFMDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankAccountType">
+          <Key>
+            <PropertyRef Name="BankAccountTypeId" />
+          </Key>
+          <Property Name="BankAccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankAccountTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankStatements">
+          <Key>
+            <PropertyRef Name="BankStatementId" />
+          </Key>
+          <Property Name="BankStatementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankAccountTypeId" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PostingDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransacionNumber" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="BalanceAmount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
         <EntityType Name="DailyPurchase">
           <Key>
             <PropertyRef Name="DailyPurchaseId" />
@@ -144,6 +165,18 @@
           <Property Name="TransactionTypeName" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TransactionTypeCode" Type="varchar" MaxLength="2" Nullable="false" />
         </EntityType>
+        <Association Name="FK__BankState__BankA__308E3499">
+          <End Role="BankAccountType" Type="Self.BankAccountType" Multiplicity="1" />
+          <End Role="BankStatements" Type="Self.BankStatements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccountType">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Principal>
+            <Dependent Role="BankStatements">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__DailyPurc__Purch__1B9317B3">
           <End Role="Items" Type="Self.Items" Multiplicity="1" />
           <End Role="DailyPurchase" Type="Self.DailyPurchase" Multiplicity="*" />
@@ -325,6 +358,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HFMDBModelStoreContainer">
+          <EntitySet Name="BankAccountType" EntityType="Self.BankAccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankStatements" EntityType="Self.BankStatements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DailyPurchase" EntityType="Self.DailyPurchase" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DailyTransactions" EntityType="Self.DailyTransactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExpenseAmountType" EntityType="Self.ExpenseAmountType" Schema="dbo" store:Type="Tables" />
@@ -340,6 +375,10 @@
           <EntitySet Name="TransactionCategory" EntityType="Self.TransactionCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BankState__BankA__308E3499" Association="Self.FK__BankState__BankA__308E3499">
+            <End Role="BankAccountType" EntitySet="BankAccountType" />
+            <End Role="BankStatements" EntitySet="BankStatements" />
+          </AssociationSet>
           <AssociationSet Name="FK__DailyPurc__Purch__1B9317B3" Association="Self.FK__DailyPurc__Purch__1B9317B3">
             <End Role="Items" EntitySet="Items" />
             <End Role="DailyPurchase" EntitySet="DailyPurchase" />
@@ -706,6 +745,12 @@
             <End Role="Item" EntitySet="Items" />
             <End Role="DailyPurchase" EntitySet="DailyPurchases" />
           </AssociationSet>
+          <EntitySet Name="BankAccountTypes" EntityType="HFMDBModel.BankAccountType" />
+          <EntitySet Name="BankStatements" EntityType="HFMDBModel.BankStatement" />
+          <AssociationSet Name="FK__BankState__BankA__308E3499" Association="HFMDBModel.FK__BankState__BankA__308E3499">
+            <End Role="BankAccountType" EntitySet="BankAccountTypes" />
+            <End Role="BankStatement" EntitySet="BankStatements" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ItemCategory">
           <Key>
@@ -846,6 +891,41 @@
             </Principal>
             <Dependent Role="DailyPurchase">
               <PropertyRef Name="PurchasedItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BankAccountType">
+          <Key>
+            <PropertyRef Name="BankAccountTypeId" />
+          </Key>
+          <Property Name="BankAccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankAccountTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BankStatements" Relationship="HFMDBModel.FK__BankState__BankA__308E3499" FromRole="BankAccountType" ToRole="BankStatement" />
+        </EntityType>
+        <EntityType Name="BankStatement">
+          <Key>
+            <PropertyRef Name="BankStatementId" />
+          </Key>
+          <Property Name="BankStatementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankAccountTypeId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PostingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TransacionNumber" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="BalanceAmount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="BankAccountType" Relationship="HFMDBModel.FK__BankState__BankA__308E3499" FromRole="BankStatement" ToRole="BankAccountType" />
+        </EntityType>
+        <Association Name="FK__BankState__BankA__308E3499">
+          <End Type="HFMDBModel.BankAccountType" Role="BankAccountType" Multiplicity="1" />
+          <End Type="HFMDBModel.BankStatement" Role="BankStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccountType">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Principal>
+            <Dependent Role="BankStatement">
+              <PropertyRef Name="BankAccountTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1006,6 +1086,29 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PurchasedItemId" ColumnName="PurchasedItemId" />
                 <ScalarProperty Name="DailyPurchaseId" ColumnName="DailyPurchaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccountTypes">
+            <EntityTypeMapping TypeName="HFMDBModel.BankAccountType">
+              <MappingFragment StoreEntitySet="BankAccountType">
+                <ScalarProperty Name="BankAccountTypeName" ColumnName="BankAccountTypeName" />
+                <ScalarProperty Name="BankAccountTypeId" ColumnName="BankAccountTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankStatements">
+            <EntityTypeMapping TypeName="HFMDBModel.BankStatement">
+              <MappingFragment StoreEntitySet="BankStatements">
+                <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransacionNumber" ColumnName="TransacionNumber" />
+                <ScalarProperty Name="TransactionDescription" ColumnName="TransactionDescription" />
+                <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="BankAccountTypeId" ColumnName="BankAccountTypeId" />
+                <ScalarProperty Name="BankStatementId" ColumnName="BankStatementId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

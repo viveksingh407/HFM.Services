@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div>
+        <div>
+            @{
+                Html.RenderPartial("AddStatement");
+            }
+        </div>
+        <div>
+            @{
+                Html.RenderPartial("Statements");
+            }
+        </div>
+    </div>
+</div>

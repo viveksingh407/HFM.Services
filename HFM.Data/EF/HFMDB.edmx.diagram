@@ -36,6 +36,9 @@
         <AssociationConnector Association="HFMDBModel.FK__ItemSubCa__ItemC__0697FACD" />
         <EntityTypeShape EntityType="HFMDBModel.DailyPurchase" Width="1.5" PointX="12.5" PointY="10.875" />
         <AssociationConnector Association="HFMDBModel.FK__DailyPurc__Purch__1B9317B3" />
+        <EntityTypeShape EntityType="HFMDBModel.BankAccountType" Width="1.5" PointX="12.375" PointY="1.625" />
+        <EntityTypeShape EntityType="HFMDBModel.BankStatement" Width="1.5" PointX="14.625" PointY="1" />
+        <AssociationConnector Association="HFMDBModel.FK__BankState__BankA__308E3499" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

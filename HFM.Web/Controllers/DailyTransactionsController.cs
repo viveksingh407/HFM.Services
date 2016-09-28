@@ -16,7 +16,7 @@ namespace HFM.Web.Controllers
         {
             DailyTransactionsModel model = new DailyTransactionsModel();
             var data = model.GetDailyTransactions();
-            FileReader.FileQuery();
+            //bofaCA.FileQuery();
             return View(data);
         }
 

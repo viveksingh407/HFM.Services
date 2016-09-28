@@ -1,0 +1,82 @@
+﻿@using HFM.Web.Models;
+
+@model IList<BankStatementModel>
+
+<table>
+    <tr>
+        <th class="hide">
+            BankStatementId
+        </th>
+        <th class="hide">
+            BankAccountTypeId
+        </th>
+        <th>
+            Bank Name
+        </th>
+        <th>
+            Transaction Date
+        </th>
+        <th>
+            Payment Date
+        </th>
+        <th>
+            Posting Date
+        </th>
+        <th>
+            Transaction Description
+        </th>
+        <th>
+            Transaction Number
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Balance Amount
+        </th>
+        <th>
+            StoreName
+        </th>
+    </tr>
+    @foreach (var data in Model)
+    {
+        <tr>
+            <td class="hide">
+                @data.BankStatementId
+            </td>
+            <td class="hide">
+                @data.BankAccountTypeId
+            </td>
+            <td>
+                @data.BankAccountTypeName
+            </td>
+            <td>
+                @data.TransactionDate
+            </td>
+            <td>
+                @data.PaymentDate
+            </td>
+            <td>
+                @data.PostingDate
+            </td>
+            <td>
+                @data.TransactionNumber
+            </td>
+            <td>
+                @data.Amount
+            </td>
+            <td>
+                @data.BalanceAmount
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="button" class="DeleteStatement" value="Delete" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    }
+</table>

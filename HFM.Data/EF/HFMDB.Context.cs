@@ -40,5 +40,7 @@ namespace HFM.Data.EF
         public virtual DbSet<ItemSubCategory> ItemSubCategories { get; set; }
         public virtual DbSet<QuantityType> QuantityTypes { get; set; }
         public virtual DbSet<DailyPurchase> DailyPurchases { get; set; }
+        public virtual DbSet<BankAccountType> BankAccountTypes { get; set; }
+        public virtual DbSet<BankStatement> BankStatements { get; set; }
     }
 }

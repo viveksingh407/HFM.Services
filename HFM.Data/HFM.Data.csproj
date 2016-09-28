@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\BankAccountType.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\BankStatement.cs">
+      <DependentUpon>HFMDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\DailyPurchase.cs">
       <DependentUpon>HFMDB.tt</DependentUpon>
     </Compile>
@@ -115,6 +121,8 @@
     <Compile Include="HFMRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IHFMRepository.cs" />
+    <Compile Include="Repository\Implementation\BankAccountTypeRepository.cs" />
+    <Compile Include="Repository\Implementation\BankStatementsRepository.cs" />
     <Compile Include="Repository\Implementation\DailyPurchaseRepository.cs" />
     <Compile Include="Repository\Implementation\ExpenseAmountTypeRepository.cs" />
     <Compile Include="Repository\Implementation\ExpenseTypeRepository.cs" />
