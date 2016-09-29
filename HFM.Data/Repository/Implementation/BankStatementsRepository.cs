@@ -78,14 +78,14 @@ namespace HFM.Data.Repository.Implementation
 
             context.BankStatements.Add(new BankStatement()
             {
-                BankAccountTypeId = BankAccountTypeId,
-                TransactionDate = TransactionDate,
-                PaymentDate = PaymentDate,
-                PostingDate = PostingDate,
-                TransactionDescription = TransactionDescription,
-                TransacionNumber = TransactionNumber,
-                Amount = Amount,
-                BalanceAmount = BalanceAmount
+                BankAccountTypeId = data.BankAccountTypeId,
+                TransactionDate = data.TransactionDate,
+                PaymentDate = data.PaymentDate,
+                PostingDate = data.PostingDate,
+                TransactionDescription = data.TransactionDescription,
+                TransacionNumber = data.TransactionNumber,
+                Amount = data.Amount,
+                BalanceAmount = data.BalanceAmount
             });
 
             context.SaveChanges();
