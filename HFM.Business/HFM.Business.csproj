@@ -53,6 +53,7 @@
     <Compile Include="StatementFacade.cs" />
     <Compile Include="Utilities\bofaCA.cs" />
     <Compile Include="Utilities\BofACC.cs" />
+    <Compile Include="Utilities\bofaYearlySummary.cs" />
     <Compile Include="Utilities\chaseCA.cs" />
   </ItemGroup>
   <ItemGroup>
