@@ -7,20 +7,9 @@ using HFM.Data.Repository.Implementation;
 
 namespace HFM.Business.Utilities
 {
-    public class BofACC
+    public class bofaCC
     {
-        public class Statement
-        {
-            public DateTime PurchaseDate { get; set; }
-            public DateTime PostingDate { get; set; }
-            public string Description { get; set; }
-            public int TransactionNumber { get; set; }
-            public int AccountType { get; set; }
-            public decimal TransactionAmount { get; set; }
-            public decimal BalanceAmount { get; set; }
-        }
-
-        public static void BofAStatements()
+        public static IList<Statement> BofAStatements(bool addToDB)
         {
             var statementText = new List<string>();
             var data = new Statement();
@@ -39,8 +28,9 @@ namespace HFM.Business.Utilities
 
             foreach (var statementPath in statementPaths)
             {
-                year = Path.GetFileName(statementPath).Substring(0, 4);
+                year = Regex.Split(Path.GetFileName(statementPath), @"[^0-9\.]+").Where(n => n.StartsWith("201")).FirstOrDefault();
                 statementText = File.ReadAllLines(statementPath).Where(n => !string.IsNullOrEmpty(n)).Select(n => n.Trim()).ToList();
+                var isMultiMonthStatement = statementText[2].StartsWith("December");
 
                 if (statementText.Contains("continuedonnextpage...") && statementText.Contains("Transactionscontinued"))
                 {
@@ -55,22 +45,29 @@ namespace HFM.Business.Utilities
 
                 statements = statementText.GetRange(startIndex, endIndex - startIndex).Where(n => n.StartsWith("0") || n.StartsWith("1")).ToList();
 
+                decimal balanceAmount = 0;
                 foreach (var transaction in statements)
                 {
-                    transactions.Add(GetStatement("2016", transaction));
+                    var currentStatement = GetStatement(transaction, isMultiMonthStatement, year);
+                    currentStatement.BalanceAmount = balanceAmount + currentStatement.TransactionAmount;
+                    transactions.Add(currentStatement);
+                    balanceAmount = currentStatement.BalanceAmount;
                 }
             }
 
-            AddStatements(transactions.Where(n => n.AccountType != 0).OrderBy(n => n.PurchaseDate).ToList());
+            return transactions;
         }
 
-        private static Statement GetStatement(string year, string statement)
+        private static Statement GetStatement(string statement, bool isMultiMonthStatement, string year)
         {
             string[] data = new string[4];
             var statementData = new Statement();
 
-            var purchaseDate = Convert.ToDateTime(string.Concat("2016", "/", statement.Substring(0, 5)));
-            var postingDate = Convert.ToDateTime(string.Concat("2016", "/", statement.Substring(6, 5)));
+            year = (isMultiMonthStatement && statement.Substring(0, 2) == "12") ? Convert.ToString(Convert.ToInt32(year) - 1) : year;
+
+            var purchaseDate = GetDate(statement.Substring(0, 5), year);
+            var postingDate = GetDate(statement.Substring(6, 5), year);
+
             var remainingStatement = statement.Substring(12);
 
             //get amount as the regex will extract all th decimals from the string.
@@ -92,6 +89,7 @@ namespace HFM.Business.Utilities
                     TransactionAmount = amount,
                     BalanceAmount = 0,
                     PostingDate = postingDate,
+                    TransactionDate = purchaseDate,
                     AccountType = 3,
                     TransactionNumber = transactionNumber
                 };
@@ -131,5 +129,18 @@ namespace HFM.Business.Utilities
 
             return isSuccess;
         }
+
+        private static string GetYear(string dateRange)
+        {
+            string transactionDate = string.Empty;
+
+            return Regex.Split(dateRange, @"[^0-9\.]+").Where(n => n.StartsWith("201")).FirstOrDefault();
+        }
+
+        private static DateTime GetDate(string datePart, string yearPart)
+        {
+            return Convert.ToDateTime(string.Concat(datePart, "/", yearPart));
+        }
     }
 }
+

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
+using HFM.Data.Repository.Implementation;
 
 namespace HFM.Business.Utilities
 {
@@ -28,18 +29,7 @@ namespace HFM.Business.Utilities
             public decimal TransactionAmount { get; set; }
         }
 
-        public class Statement
-        {
-            public DateTime PurchaseDate { get; set; }
-            public DateTime PostingDate { get; set; }
-            public string Description { get; set; }
-            public int TransactionNumber { get; set; }
-            public int AccountType { get; set; }
-            public decimal TransactionAmount { get; set; }
-            public decimal BalanceAmount { get; set; }
-        }
-
-        public static IList<Statement> ChaseStatements()
+        public static IList<Statement> ChaseStatements(bool addToDB)
         {
             var statementText = new List<string>();
             var data = new Statement();
@@ -59,7 +49,8 @@ namespace HFM.Business.Utilities
 
             foreach (var statementPath in statementPaths)
             {
-                year = Path.GetFileName(statementPath).Substring(0, 4);
+                //year = Path.GetFileName(statementPath).Substring(0, 4);
+                year = Regex.Split(Path.GetFileName(statementPath), @"[^0-9\.]+").Where(n => n.StartsWith("201")).FirstOrDefault();
                 statementText = File.ReadAllLines(statementPath).Where(n => !string.IsNullOrEmpty(n)).Select(n => n.Trim()).ToList();
 
                 transactionStatementStartIndex = statementText.FindIndex(n => string.Compare(n, "TRANSACTION DETAIL", true) == 0) + 2;
@@ -82,12 +73,17 @@ namespace HFM.Business.Utilities
                 }
             }
 
-            if (transactions.Sum(n => n.BalanceAmount) != transactions.Last().BalanceAmount)
+            if (transactions.Sum(n => n.TransactionAmount) != transactions.Last().BalanceAmount)
             {
                 throw new InvalidOperationException();
             }
 
             return transactions;
+
+            //if (addToDB)
+            //{
+            //    AddStatements(transactions.OrderBy(n => n.PurchaseDate).ToList());
+            //}
         }
 
         private static Statement GetStatement(string year, string statement, int transactionIdentifier)
@@ -135,6 +131,42 @@ namespace HFM.Business.Utilities
                 AccountType = 1,
                 TransactionNumber = transactionIdentifier
             };
+        }
+
+        private static bool AddStatements(IList<Statement> statements)
+        {
+            bool isSuccess = false;
+
+            BankStatementsRepository repo = new BankStatementsRepository();
+
+            foreach (var data in statements)
+            {
+                repo.Add(new BankStatementsRepository()
+                {
+                    BankAccountTypeId = data.AccountType,
+                    TransactionDate = data.PurchaseDate,
+                    PaymentDate = data.PurchaseDate,
+                    PostingDate = data.PostingDate,
+                    TransactionDescription = data.Description,
+                    TransactionNumber = data.TransactionNumber,
+                    Amount = data.TransactionAmount,
+                    BalanceAmount = data.BalanceAmount
+                });
+            }
+
+            return isSuccess;
+        }
+
+        private static string GetYear(string dateRange)
+        {
+            string transactionDate = string.Empty;
+
+            return Regex.Split(dateRange, @"[^0-9\.]+").Where(n => n.StartsWith("201")).FirstOrDefault();
+        }
+
+        private static DateTime GetDate(string datePart, string yearPart)
+        {
+            return Convert.ToDateTime(string.Concat(datePart, "/", yearPart));
         }
     }
 }

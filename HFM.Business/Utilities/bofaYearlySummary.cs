@@ -9,18 +9,7 @@ namespace HFM.Business.Utilities
 {
     public class bofaYearlySummary
     {
-        public class Statement
-        {
-            public DateTime PurchaseDate { get; set; }
-            public DateTime PostingDate { get; set; }
-            public string Description { get; set; }
-            public int TransactionNumber { get; set; }
-            public int AccountType { get; set; }
-            public decimal TransactionAmount { get; set; }
-            public decimal BalanceAmount { get; set; }
-        }
-
-        public static void BofAStatements()
+        public static IList<Statement> BofAStatements(bool addToDB)
         {
             var statementText = new List<string>();
             var data = new Statement();
@@ -73,6 +62,7 @@ namespace HFM.Business.Utilities
                             TransactionAmount = Convert.ToDecimal(statement[3].Trim()),
                             BalanceAmount = 0,
                             PostingDate = Convert.ToDateTime(statement[0].Trim()),
+                            TransactionDate = Convert.ToDateTime(statement[0].Trim()),
                             AccountType = 3,
                             TransactionNumber = transactionNumber
                         });
@@ -87,39 +77,7 @@ namespace HFM.Business.Utilities
                 }
             }
 
-            AddStatements(transactions.OrderBy(n => n.PurchaseDate).ToList());
-        }
-
-        private static bool AddStatements(IList<Statement> statements)
-        {
-            bool isSuccess = false;
-
-            BankStatementsRepository repo = new BankStatementsRepository();
-
-            try
-            {
-                var a = statements.Where(n => n.AccountType == 0);
-                foreach (var data in statements)
-                {
-                    repo.Add(new BankStatementsRepository()
-                    {
-                        BankAccountTypeId = data.AccountType,
-                        TransactionDate = data.PurchaseDate,
-                        PaymentDate = data.PurchaseDate,
-                        PostingDate = data.PostingDate,
-                        TransactionDescription = data.Description,
-                        TransactionNumber = data.TransactionNumber,
-                        Amount = data.TransactionAmount,
-                        BalanceAmount = data.BalanceAmount
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-            return isSuccess;
+            return transactions;
         }
     }
 }
