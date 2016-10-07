@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\BankStatementsController.cs" />
     <Compile Include="Controllers\DailyTransactionsController.cs" />
+    <Compile Include="Controllers\HomeScreenController.cs" />
     <Compile Include="Controllers\HFMController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Global.asax.cs">
@@ -202,6 +203,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\HFMScripts\DailyTransactions.js" />
+    <Content Include="Scripts\HFMScripts\HomeScreen.js" />
     <Content Include="Scripts\HFMScripts\Purchase.js" />
     <Content Include="Scripts\HFMScripts\Statements.js" />
     <Content Include="Scripts\HFMScripts\Transactions.js" />
@@ -243,9 +245,11 @@
     <Content Include="Views\BankStatements\Index.cshtml" />
     <Content Include="Views\BankStatements\Statements.cshtml" />
     <Content Include="Views\BankStatements\AddStatement.cshtml" />
+    <Content Include="Views\HomeScreen\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Dashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
