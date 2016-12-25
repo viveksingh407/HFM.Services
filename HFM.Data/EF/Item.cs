@@ -27,11 +27,11 @@ namespace HFM.Data.EF
         public Nullable<int> StoreId { get; set; }
         public Nullable<int> QuantityId { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DailyPurchase> DailyPurchases { get; set; }
         public virtual ItemCategory ItemCategory { get; set; }
         public virtual ItemSubCategory ItemSubCategory { get; set; }
         public virtual QuantityType QuantityType { get; set; }
         public virtual Store Store { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DailyPurchase> DailyPurchases { get; set; }
     }
 }

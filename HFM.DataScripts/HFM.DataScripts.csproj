@@ -43,15 +43,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\AdditionalTables.sql" />
     <Content Include="Scripts\BankStatements.sql" />
-    <Content Include="Scripts\CreateTables.sql" />
-    <Content Include="Scripts\DropTables.sql" />
-    <Content Include="Scripts\HFMDB Insert Data.sql" />
-    <Content Include="Scripts\HFMDB.sql" />
-    <Content Include="Scripts\InsertDetails.sql" />
-    <Content Include="Scripts\ItemData.sql" />
-    <Content Include="Scripts\select.sql" />
+    <Content Include="Scripts\HFMInsertData.sql" />
+    <Content Include="Scripts\HFMObjects.sql" />
+    <Content Include="Scripts\SelectAllItems.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

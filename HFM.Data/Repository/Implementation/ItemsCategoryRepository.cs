@@ -14,12 +14,12 @@ namespace HFM.Data.Repository.Implementation
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        private static HFMDBEntities context;
+        private static HomeFinanceDBEntities context;
 
         public IList<ItemsCategoryRepository> Get()
         {
             ItemsCategoryRepository repo = new ItemsCategoryRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             return context.ItemCategories.Select(n => new ItemsCategoryRepository()
             {
@@ -31,7 +31,7 @@ namespace HFM.Data.Repository.Implementation
         public ItemsCategoryRepository GetById(int id)
         {
             ItemsCategoryRepository repo = new ItemsCategoryRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             return context.ItemCategories.Where(n => n.ItemCategoryId == id).Select(n => new ItemsCategoryRepository()
             {
@@ -43,7 +43,7 @@ namespace HFM.Data.Repository.Implementation
         public ItemsCategoryRepository Add(ItemsCategoryRepository data)
         {
             ItemsCategoryRepository repo = new ItemsCategoryRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             context.ItemCategories.Add(new ItemCategory()
             {
@@ -57,7 +57,7 @@ namespace HFM.Data.Repository.Implementation
         public ItemsCategoryRepository Update(ItemsCategoryRepository data)
         {
             ItemsCategoryRepository repo = new ItemsCategoryRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             try
             {
@@ -77,7 +77,7 @@ namespace HFM.Data.Repository.Implementation
         public void Delete(int id)
         {
             ItemsCategoryRepository repo = new ItemsCategoryRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var details = context.ItemCategories.Where(n => n.ItemCategoryId == id).First();
 

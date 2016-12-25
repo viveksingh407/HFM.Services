@@ -53,16 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\BankAccountType.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\BankStatement.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\DailyPurchase.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\DailyTransaction.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\ExpenseAmountType.cs">
       <DependentUpon>HFMDB.tt</DependentUpon>
@@ -85,29 +85,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HFMDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EF\HomeFinanceDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeFinanceDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\HomeFinanceDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\HomeFinanceDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomeFinanceDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="EF\Inventory.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Item.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\ItemCategory.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\ItemSubCategory.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\PurchaseLocation.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\QuantityType.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Store.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\StoreInventory.cs">
-      <DependentUpon>HFMDB.tt</DependentUpon>
+      <DependentUpon>HomeFinanceDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\TransactionCategory.cs">
       <DependentUpon>HFMDB.tt</DependentUpon>
@@ -142,6 +157,13 @@
     <None Include="EF\HFMDB.edmx.diagram">
       <DependentUpon>HFMDB.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="EF\HomeFinanceDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>HomeFinanceDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\HomeFinanceDB.edmx.diagram">
+      <DependentUpon>HomeFinanceDB.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +180,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HFMDB.edmx</DependentUpon>
       <LastGenOutput>HFMDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\HomeFinanceDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HomeFinanceDB.edmx</DependentUpon>
+      <LastGenOutput>HomeFinanceDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\HomeFinanceDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HomeFinanceDB.edmx</DependentUpon>
+      <LastGenOutput>HomeFinanceDB.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

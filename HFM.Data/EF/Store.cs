@@ -18,8 +18,8 @@ namespace HFM.Data.EF
         public Store()
         {
             this.DailyTransactions = new HashSet<DailyTransaction>();
-            this.StoreInventories = new HashSet<StoreInventory>();
             this.Items = new HashSet<Item>();
+            this.StoreInventories = new HashSet<StoreInventory>();
         }
     
         public int StoreId { get; set; }
@@ -29,10 +29,10 @@ namespace HFM.Data.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DailyTransaction> DailyTransactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Item> Items { get; set; }
         public virtual PurchaseLocation PurchaseLocation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StoreInventory> StoreInventories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Item> Items { get; set; }
     }
 }

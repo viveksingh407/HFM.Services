@@ -21,12 +21,12 @@ namespace HFM.Data.Repository.Implementation
         public decimal Amount { get; set; }
         public decimal BalanceAmount { get; set; }
 
-        private static HFMDBEntities context;
+        private static HomeFinanceDBEntities context;
 
         public IList<BankStatementsRepository> Get()
         {
             BankStatementsRepository repo = new BankStatementsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var data = (from a in context.BankStatements
                         join b in context.BankAccountTypes on a.BankAccountTypeId equals b.BankAccountTypeId
@@ -50,7 +50,7 @@ namespace HFM.Data.Repository.Implementation
         public BankStatementsRepository GetById(int dailyPurchaseId)
         {
             BankStatementsRepository repo = new BankStatementsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var data = (from a in context.BankStatements
                         join b in context.BankAccountTypes on a.BankAccountTypeId equals b.BankAccountTypeId
@@ -74,7 +74,7 @@ namespace HFM.Data.Repository.Implementation
         public BankStatementsRepository Add(BankStatementsRepository data)
         {
             BankStatementsRepository repo = new BankStatementsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             context.BankStatements.Add(new BankStatement()
             {
@@ -96,7 +96,7 @@ namespace HFM.Data.Repository.Implementation
         public BankStatementsRepository Update(BankStatementsRepository data)
         {
             BankStatementsRepository repo = new BankStatementsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             try
             {
@@ -123,7 +123,7 @@ namespace HFM.Data.Repository.Implementation
         public void Delete(int id)
         {
             BankStatementsRepository repo = new BankStatementsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var details = context.BankStatements.Where(n => n.BankStatementId == id).First();
 

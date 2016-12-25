@@ -13,12 +13,12 @@ namespace HFM.Data.Repository.Implementation
         public int BankAccountTypeId { get; set; }
         public string BankAccountTypeName { get; set; }
 
-        private static HFMDBEntities context;
+        private static HomeFinanceDBEntities context;
 
         public IList<BankAccountTypeRepository> Get()
         {
             BankAccountTypeRepository repo = new BankAccountTypeRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var data = (from a in context.BankAccountTypes
                         select new BankAccountTypeRepository()
@@ -33,7 +33,7 @@ namespace HFM.Data.Repository.Implementation
         public BankAccountTypeRepository GetById(int dailyPurchaseId)
         {
             BankAccountTypeRepository repo = new BankAccountTypeRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var data = (from a in context.BankAccountTypes
                         select new BankAccountTypeRepository()
@@ -48,7 +48,7 @@ namespace HFM.Data.Repository.Implementation
         public BankAccountTypeRepository Add(BankAccountTypeRepository data)
         {
             BankAccountTypeRepository repo = new BankAccountTypeRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             context.BankAccountTypes.Add(new BankAccountType()
             {
@@ -63,7 +63,7 @@ namespace HFM.Data.Repository.Implementation
         public BankAccountTypeRepository Update(BankAccountTypeRepository data)
         {
             BankAccountTypeRepository repo = new BankAccountTypeRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             try
             {
@@ -83,7 +83,7 @@ namespace HFM.Data.Repository.Implementation
         public void Delete(int id)
         {
             BankAccountTypeRepository repo = new BankAccountTypeRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var details = context.BankAccountTypes.Where(n => n.BankAccountTypeId == id).First();
 

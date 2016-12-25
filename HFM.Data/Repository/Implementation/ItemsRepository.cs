@@ -17,12 +17,12 @@ namespace HFM.Data.Repository.Implementation
         public decimal ItemPrice { get; set; }
         public DateTime PurchaseDate { get; set; }
 
-        private static HFMDBEntities context;
+        private static HomeFinanceDBEntities context;
 
         public IList<ItemsRepository> Get()
         {
             ItemsRepository repo = new ItemsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             return context.Items.Select(n => new ItemsRepository()
             {
@@ -36,7 +36,7 @@ namespace HFM.Data.Repository.Implementation
         public ItemsRepository GetById(int id)
         {
             ItemsRepository repo = new ItemsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             return context.Items.Where(n => n.ItemId == id).Select(n => new ItemsRepository()
             {
@@ -50,7 +50,7 @@ namespace HFM.Data.Repository.Implementation
         public ItemsRepository Add(ItemsRepository data)
         {
             ItemsRepository repo = new ItemsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             context.Items.Add(new Item()
             {
@@ -66,7 +66,7 @@ namespace HFM.Data.Repository.Implementation
         public ItemsRepository Update(ItemsRepository data)
         {
             ItemsRepository repo = new ItemsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             try
             {
@@ -86,7 +86,7 @@ namespace HFM.Data.Repository.Implementation
         public void Delete(int id)
         {
             ItemsRepository repo = new ItemsRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var details = context.Items.Where(n => n.ItemId == id).First();
 

@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HomeFinanceDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BankAccountType">
+          <Key>
+            <PropertyRef Name="BankAccountTypeId" />
+          </Key>
+          <Property Name="BankAccountTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankAccountTypeName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankStatements">
+          <Key>
+            <PropertyRef Name="BankStatementId" />
+          </Key>
+          <Property Name="BankStatementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankAccountTypeId" Type="int" Nullable="false" />
+          <Property Name="TransactionDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="PostingDate" Type="datetime" Nullable="false" />
+          <Property Name="TransactionDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransacionNumber" Type="int" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="BalanceAmount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="DailyPurchase">
+          <Key>
+            <PropertyRef Name="DailyPurchaseId" />
+          </Key>
+          <Property Name="DailyPurchaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PurchasedItemId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DailyTransactions">
+          <Key>
+            <PropertyRef Name="DailyTransactionId" />
+          </Key>
+          <Property Name="DailyTransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreId" Type="int" />
+          <Property Name="PurchaseDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="InventoryId" />
+          </Key>
+          <Property Name="InventoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="InventoryDetails" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItemCategories">
+          <Key>
+            <PropertyRef Name="ItemCategoryId" />
+          </Key>
+          <Property Name="ItemCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemCategoryName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="50" />
+          <Property Name="ItemCategoryId" Type="int" />
+          <Property Name="ItemSubCategoryId" Type="int" />
+          <Property Name="StoreId" Type="int" />
+          <Property Name="QuantityId" Type="int" />
+        </EntityType>
+        <EntityType Name="ItemSubCategories">
+          <Key>
+            <PropertyRef Name="ItemSubCategoryId" />
+          </Key>
+          <Property Name="ItemSubCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemSubCategoryName" Type="varchar" MaxLength="50" />
+          <Property Name="ItemCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseLocation">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="QuantityTypes">
+          <Key>
+            <PropertyRef Name="QuantityTypeId" />
+          </Key>
+          <Property Name="QuantityTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuantityTypeName" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="StoreInventory">
+          <Key>
+            <PropertyRef Name="StoreInventoryId" />
+          </Key>
+          <Property Name="StoreInventoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreId" Type="int" Nullable="false" />
+          <Property Name="InventoryId" Type="int" />
+          <Property Name="LocationId" Type="int" />
+          <Property Name="Quantity" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="UnitAmount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="MRP" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Tax" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="StoreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreName" Type="varchar" MaxLength="500" />
+          <Property Name="StoreDetails" Type="varchar" MaxLength="500" />
+          <Property Name="LocationId" Type="int" />
+        </EntityType>
+        <Association Name="FK__BankState__BankA__300424B4">
+          <End Role="BankAccountType" Type="Self.BankAccountType" Multiplicity="1" />
+          <End Role="BankStatements" Type="Self.BankStatements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccountType">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Principal>
+            <Dependent Role="BankStatements">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DailyPurc__Purch__21B6055D">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="DailyPurchase" Type="Self.DailyPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="DailyPurchase">
+              <PropertyRef Name="PurchasedItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DailyTran__Store__22AA2996">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="DailyTransactions" Type="Self.DailyTransactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="DailyTransactions">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemCateg__239E4DCF">
+          <End Role="ItemCategories" Type="Self.ItemCategories" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemSubCa__24927208">
+          <End Role="ItemSubCategories" Type="Self.ItemSubCategories" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemSubCategories">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__QuantityI__25869641">
+          <End Role="QuantityTypes" Type="Self.QuantityTypes" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityTypes">
+              <PropertyRef Name="QuantityTypeId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="QuantityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__StoreId__267ABA7A">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubCa__ItemC__276EDEB3">
+          <End Role="ItemCategories" Type="Self.ItemCategories" Multiplicity="0..1" />
+          <End Role="ItemSubCategories" Type="Self.ItemSubCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemSubCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreInve__Inven__286302EC">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+          <End Role="StoreInventory" Type="Self.StoreInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="InventoryId" />
+            </Principal>
+            <Dependent Role="StoreInventory">
+              <PropertyRef Name="InventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreInve__Locat__29572725">
+          <End Role="PurchaseLocation" Type="Self.PurchaseLocation" Multiplicity="0..1" />
+          <End Role="StoreInventory" Type="Self.StoreInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="StoreInventory">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreInve__Store__2A4B4B5E">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="StoreInventory" Type="Self.StoreInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="StoreInventory">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stores__Location__2B3F6F97">
+          <End Role="PurchaseLocation" Type="Self.PurchaseLocation" Multiplicity="0..1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomeFinanceDBModelStoreContainer">
+          <EntitySet Name="BankAccountType" EntityType="Self.BankAccountType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankStatements" EntityType="Self.BankStatements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyPurchase" EntityType="Self.DailyPurchase" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyTransactions" EntityType="Self.DailyTransactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemSubCategories" EntityType="Self.ItemSubCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseLocation" EntityType="Self.PurchaseLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuantityTypes" EntityType="Self.QuantityTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreInventory" EntityType="Self.StoreInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BankState__BankA__300424B4" Association="Self.FK__BankState__BankA__300424B4">
+            <End Role="BankAccountType" EntitySet="BankAccountType" />
+            <End Role="BankStatements" EntitySet="BankStatements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DailyPurc__Purch__21B6055D" Association="Self.FK__DailyPurc__Purch__21B6055D">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="DailyPurchase" EntitySet="DailyPurchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DailyTran__Store__22AA2996" Association="Self.FK__DailyTran__Store__22AA2996">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="DailyTransactions" EntitySet="DailyTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemCateg__239E4DCF" Association="Self.FK__Items__ItemCateg__239E4DCF">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemSubCa__24927208" Association="Self.FK__Items__ItemSubCa__24927208">
+            <End Role="ItemSubCategories" EntitySet="ItemSubCategories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__QuantityI__25869641" Association="Self.FK__Items__QuantityI__25869641">
+            <End Role="QuantityTypes" EntitySet="QuantityTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__StoreId__267ABA7A" Association="Self.FK__Items__StoreId__267ABA7A">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemSubCa__ItemC__276EDEB3" Association="Self.FK__ItemSubCa__ItemC__276EDEB3">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="ItemSubCategories" EntitySet="ItemSubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreInve__Inven__286302EC" Association="Self.FK__StoreInve__Inven__286302EC">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="StoreInventory" EntitySet="StoreInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreInve__Locat__29572725" Association="Self.FK__StoreInve__Locat__29572725">
+            <End Role="PurchaseLocation" EntitySet="PurchaseLocation" />
+            <End Role="StoreInventory" EntitySet="StoreInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreInve__Store__2A4B4B5E" Association="Self.FK__StoreInve__Store__2A4B4B5E">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="StoreInventory" EntitySet="StoreInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stores__Location__2B3F6F97" Association="Self.FK__Stores__Location__2B3F6F97">
+            <End Role="PurchaseLocation" EntitySet="PurchaseLocation" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomeFinanceDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DailyPurchase">
+          <Key>
+            <PropertyRef Name="DailyPurchaseId" />
+          </Key>
+          <Property Name="DailyPurchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PurchasedItemId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Item" Relationship="Self.FK__DailyPurc__Purch__21B6055D" FromRole="DailyPurchase" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="DailyTransaction">
+          <Key>
+            <PropertyRef Name="DailyTransactionId" />
+          </Key>
+          <Property Name="DailyTransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreId" Type="Int32" />
+          <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Store" Relationship="Self.FK__DailyTran__Store__22AA2996" FromRole="DailyTransactions" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="InventoryId" />
+          </Key>
+          <Property Name="InventoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InventoryDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StoreInventories" Relationship="Self.FK__StoreInve__Inven__286302EC" FromRole="Inventory" ToRole="StoreInventory" />
+        </EntityType>
+        <EntityType Name="ItemCategory">
+          <Key>
+            <PropertyRef Name="ItemCategoryId" />
+          </Key>
+          <Property Name="ItemCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__ItemCateg__239E4DCF" FromRole="ItemCategories" ToRole="Items" />
+          <NavigationProperty Name="ItemSubCategories" Relationship="Self.FK__ItemSubCa__ItemC__276EDEB3" FromRole="ItemCategories" ToRole="ItemSubCategories" />
+        </EntityType>
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ItemId" />
+          </Key>
+          <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCategoryId" Type="Int32" />
+          <Property Name="ItemSubCategoryId" Type="Int32" />
+          <Property Name="StoreId" Type="Int32" />
+          <Property Name="QuantityId" Type="Int32" />
+          <NavigationProperty Name="DailyPurchases" Relationship="Self.FK__DailyPurc__Purch__21B6055D" FromRole="Items" ToRole="DailyPurchase" />
+          <NavigationProperty Name="ItemCategory" Relationship="Self.FK__Items__ItemCateg__239E4DCF" FromRole="Items" ToRole="ItemCategories" />
+          <NavigationProperty Name="ItemSubCategory" Relationship="Self.FK__Items__ItemSubCa__24927208" FromRole="Items" ToRole="ItemSubCategories" />
+          <NavigationProperty Name="QuantityType" Relationship="Self.FK__Items__QuantityI__25869641" FromRole="Items" ToRole="QuantityTypes" />
+          <NavigationProperty Name="Store" Relationship="Self.FK__Items__StoreId__267ABA7A" FromRole="Items" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="ItemSubCategory">
+          <Key>
+            <PropertyRef Name="ItemSubCategoryId" />
+          </Key>
+          <Property Name="ItemSubCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemSubCategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCategoryId" Type="Int32" />
+          <NavigationProperty Name="ItemCategory" Relationship="Self.FK__ItemSubCa__ItemC__276EDEB3" FromRole="ItemSubCategories" ToRole="ItemCategories" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__ItemSubCa__24927208" FromRole="ItemSubCategories" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="PurchaseLocation">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LocationName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StoreInventories" Relationship="Self.FK__StoreInve__Locat__29572725" FromRole="PurchaseLocation" ToRole="StoreInventory" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK__Stores__Location__2B3F6F97" FromRole="PurchaseLocation" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="QuantityType">
+          <Key>
+            <PropertyRef Name="QuantityTypeId" />
+          </Key>
+          <Property Name="QuantityTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuantityTypeName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__QuantityI__25869641" FromRole="QuantityTypes" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="StoreInventory">
+          <Key>
+            <PropertyRef Name="StoreInventoryId" />
+          </Key>
+          <Property Name="StoreInventoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreId" Type="Int32" Nullable="false" />
+          <Property Name="InventoryId" Type="Int32" />
+          <Property Name="LocationId" Type="Int32" />
+          <Property Name="Quantity" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="UnitAmount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="MRP" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Tax" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Inventory" Relationship="Self.FK__StoreInve__Inven__286302EC" FromRole="StoreInventory" ToRole="Inventory" />
+          <NavigationProperty Name="PurchaseLocation" Relationship="Self.FK__StoreInve__Locat__29572725" FromRole="StoreInventory" ToRole="PurchaseLocation" />
+          <NavigationProperty Name="Store" Relationship="Self.FK__StoreInve__Store__2A4B4B5E" FromRole="StoreInventory" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="StoreId" />
+          </Key>
+          <Property Name="StoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="StoreDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LocationId" Type="Int32" />
+          <NavigationProperty Name="DailyTransactions" Relationship="Self.FK__DailyTran__Store__22AA2996" FromRole="Stores" ToRole="DailyTransactions" />
+          <NavigationProperty Name="Items" Relationship="Self.FK__Items__StoreId__267ABA7A" FromRole="Stores" ToRole="Items" />
+          <NavigationProperty Name="PurchaseLocation" Relationship="Self.FK__Stores__Location__2B3F6F97" FromRole="Stores" ToRole="PurchaseLocation" />
+          <NavigationProperty Name="StoreInventories" Relationship="Self.FK__StoreInve__Store__2A4B4B5E" FromRole="Stores" ToRole="StoreInventory" />
+        </EntityType>
+        <Association Name="FK__DailyPurc__Purch__21B6055D">
+          <End Role="Items" Type="Self.Item" Multiplicity="1" />
+          <End Role="DailyPurchase" Type="Self.DailyPurchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ItemId" />
+            </Principal>
+            <Dependent Role="DailyPurchase">
+              <PropertyRef Name="PurchasedItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DailyTran__Store__22AA2996">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="DailyTransactions" Type="Self.DailyTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="DailyTransactions">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreInve__Inven__286302EC">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+          <End Role="StoreInventory" Type="Self.StoreInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="InventoryId" />
+            </Principal>
+            <Dependent Role="StoreInventory">
+              <PropertyRef Name="InventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemCateg__239E4DCF">
+          <End Role="ItemCategories" Type="Self.ItemCategory" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemSubCa__ItemC__276EDEB3">
+          <End Role="ItemCategories" Type="Self.ItemCategory" Multiplicity="0..1" />
+          <End Role="ItemSubCategories" Type="Self.ItemSubCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Principal>
+            <Dependent Role="ItemSubCategories">
+              <PropertyRef Name="ItemCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__ItemSubCa__24927208">
+          <End Role="ItemSubCategories" Type="Self.ItemSubCategory" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItemSubCategories">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="ItemSubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__QuantityI__25869641">
+          <End Role="QuantityTypes" Type="Self.QuantityType" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuantityTypes">
+              <PropertyRef Name="QuantityTypeId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="QuantityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__StoreId__267ABA7A">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Items" Type="Self.Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreInve__Locat__29572725">
+          <End Role="PurchaseLocation" Type="Self.PurchaseLocation" Multiplicity="0..1" />
+          <End Role="StoreInventory" Type="Self.StoreInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="StoreInventory">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Stores__Location__2B3F6F97">
+          <End Role="PurchaseLocation" Type="Self.PurchaseLocation" Multiplicity="0..1" />
+          <End Role="Stores" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PurchaseLocation">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StoreInve__Store__2A4B4B5E">
+          <End Role="Stores" Type="Self.Store" Multiplicity="1" />
+          <End Role="StoreInventory" Type="Self.StoreInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="StoreId" />
+            </Principal>
+            <Dependent Role="StoreInventory">
+              <PropertyRef Name="StoreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HomeFinanceDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DailyPurchases" EntityType="Self.DailyPurchase" />
+          <EntitySet Name="DailyTransactions" EntityType="Self.DailyTransaction" />
+          <EntitySet Name="Inventories" EntityType="Self.Inventory" />
+          <EntitySet Name="ItemCategories" EntityType="Self.ItemCategory" />
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="ItemSubCategories" EntityType="Self.ItemSubCategory" />
+          <EntitySet Name="PurchaseLocations" EntityType="Self.PurchaseLocation" />
+          <EntitySet Name="QuantityTypes" EntityType="Self.QuantityType" />
+          <EntitySet Name="StoreInventories" EntityType="Self.StoreInventory" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <AssociationSet Name="FK__DailyPurc__Purch__21B6055D" Association="Self.FK__DailyPurc__Purch__21B6055D">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="DailyPurchase" EntitySet="DailyPurchases" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DailyTran__Store__22AA2996" Association="Self.FK__DailyTran__Store__22AA2996">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="DailyTransactions" EntitySet="DailyTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreInve__Inven__286302EC" Association="Self.FK__StoreInve__Inven__286302EC">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="StoreInventory" EntitySet="StoreInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemCateg__239E4DCF" Association="Self.FK__Items__ItemCateg__239E4DCF">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemSubCa__ItemC__276EDEB3" Association="Self.FK__ItemSubCa__ItemC__276EDEB3">
+            <End Role="ItemCategories" EntitySet="ItemCategories" />
+            <End Role="ItemSubCategories" EntitySet="ItemSubCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__ItemSubCa__24927208" Association="Self.FK__Items__ItemSubCa__24927208">
+            <End Role="ItemSubCategories" EntitySet="ItemSubCategories" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__QuantityI__25869641" Association="Self.FK__Items__QuantityI__25869641">
+            <End Role="QuantityTypes" EntitySet="QuantityTypes" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__StoreId__267ABA7A" Association="Self.FK__Items__StoreId__267ABA7A">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreInve__Locat__29572725" Association="Self.FK__StoreInve__Locat__29572725">
+            <End Role="PurchaseLocation" EntitySet="PurchaseLocations" />
+            <End Role="StoreInventory" EntitySet="StoreInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Stores__Location__2B3F6F97" Association="Self.FK__Stores__Location__2B3F6F97">
+            <End Role="PurchaseLocation" EntitySet="PurchaseLocations" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StoreInve__Store__2A4B4B5E" Association="Self.FK__StoreInve__Store__2A4B4B5E">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="StoreInventory" EntitySet="StoreInventories" />
+          </AssociationSet>
+          <EntitySet Name="BankAccountTypes" EntityType="HomeFinanceDBModel.BankAccountType" />
+          <EntitySet Name="BankStatements" EntityType="HomeFinanceDBModel.BankStatement" />
+          <AssociationSet Name="FK__BankState__BankA__300424B4" Association="HomeFinanceDBModel.FK__BankState__BankA__300424B4">
+            <End Role="BankAccountType" EntitySet="BankAccountTypes" />
+            <End Role="BankStatement" EntitySet="BankStatements" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BankAccountType">
+          <Key>
+            <PropertyRef Name="BankAccountTypeId" />
+          </Key>
+          <Property Name="BankAccountTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankAccountTypeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BankStatements" Relationship="HomeFinanceDBModel.FK__BankState__BankA__300424B4" FromRole="BankAccountType" ToRole="BankStatement" />
+        </EntityType>
+        <EntityType Name="BankStatement">
+          <Key>
+            <PropertyRef Name="BankStatementId" />
+          </Key>
+          <Property Name="BankStatementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankAccountTypeId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="PostingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TransacionNumber" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="BalanceAmount" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="BankAccountType" Relationship="HomeFinanceDBModel.FK__BankState__BankA__300424B4" FromRole="BankStatement" ToRole="BankAccountType" />
+        </EntityType>
+        <Association Name="FK__BankState__BankA__300424B4">
+          <End Type="HomeFinanceDBModel.BankAccountType" Role="BankAccountType" Multiplicity="1" />
+          <End Type="HomeFinanceDBModel.BankStatement" Role="BankStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccountType">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Principal>
+            <Dependent Role="BankStatement">
+              <PropertyRef Name="BankAccountTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomeFinanceDBModelStoreContainer" CdmEntityContainer="HomeFinanceDBEntities">
+          <EntitySetMapping Name="DailyPurchases">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.DailyPurchase">
+              <MappingFragment StoreEntitySet="DailyPurchase">
+                <ScalarProperty Name="DailyPurchaseId" ColumnName="DailyPurchaseId" />
+                <ScalarProperty Name="PurchasedItemId" ColumnName="PurchasedItemId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyTransactions">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.DailyTransaction">
+              <MappingFragment StoreEntitySet="DailyTransactions">
+                <ScalarProperty Name="DailyTransactionId" ColumnName="DailyTransactionId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+                <ScalarProperty Name="InventoryName" ColumnName="InventoryName" />
+                <ScalarProperty Name="InventoryDetails" ColumnName="InventoryDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCategories">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.ItemCategory">
+              <MappingFragment StoreEntitySet="ItemCategories">
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+                <ScalarProperty Name="ItemCategoryName" ColumnName="ItemCategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+                <ScalarProperty Name="ItemSubCategoryId" ColumnName="ItemSubCategoryId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="QuantityId" ColumnName="QuantityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemSubCategories">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.ItemSubCategory">
+              <MappingFragment StoreEntitySet="ItemSubCategories">
+                <ScalarProperty Name="ItemSubCategoryId" ColumnName="ItemSubCategoryId" />
+                <ScalarProperty Name="ItemSubCategoryName" ColumnName="ItemSubCategoryName" />
+                <ScalarProperty Name="ItemCategoryId" ColumnName="ItemCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseLocations">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.PurchaseLocation">
+              <MappingFragment StoreEntitySet="PurchaseLocation">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuantityTypes">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.QuantityType">
+              <MappingFragment StoreEntitySet="QuantityTypes">
+                <ScalarProperty Name="QuantityTypeId" ColumnName="QuantityTypeId" />
+                <ScalarProperty Name="QuantityTypeName" ColumnName="QuantityTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StoreInventories">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.StoreInventory">
+              <MappingFragment StoreEntitySet="StoreInventory">
+                <ScalarProperty Name="StoreInventoryId" ColumnName="StoreInventoryId" />
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="InventoryId" ColumnName="InventoryId" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitAmount" ColumnName="UnitAmount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="MRP" ColumnName="MRP" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.Store">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="StoreId" ColumnName="StoreId" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="StoreDetails" ColumnName="StoreDetails" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccountTypes">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.BankAccountType">
+              <MappingFragment StoreEntitySet="BankAccountType">
+                <ScalarProperty Name="BankAccountTypeName" ColumnName="BankAccountTypeName" />
+                <ScalarProperty Name="BankAccountTypeId" ColumnName="BankAccountTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankStatements">
+            <EntityTypeMapping TypeName="HomeFinanceDBModel.BankStatement">
+              <MappingFragment StoreEntitySet="BankStatements">
+                <ScalarProperty Name="BalanceAmount" ColumnName="BalanceAmount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransacionNumber" ColumnName="TransacionNumber" />
+                <ScalarProperty Name="TransactionDescription" ColumnName="TransactionDescription" />
+                <ScalarProperty Name="PostingDate" ColumnName="PostingDate" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="BankAccountTypeId" ColumnName="BankAccountTypeId" />
+                <ScalarProperty Name="BankStatementId" ColumnName="BankStatementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

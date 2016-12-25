@@ -19,7 +19,6 @@ namespace HFM.Data.EF
         {
             this.Items = new HashSet<Item>();
             this.ItemSubCategories = new HashSet<ItemSubCategory>();
-            this.ItemSubCategories1 = new HashSet<ItemSubCategory>();
         }
     
         public int ItemCategoryId { get; set; }
@@ -29,7 +28,5 @@ namespace HFM.Data.EF
         public virtual ICollection<Item> Items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemSubCategory> ItemSubCategories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemSubCategory> ItemSubCategories1 { get; set; }
     }
 }

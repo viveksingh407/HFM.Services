@@ -27,12 +27,12 @@ namespace HFM.Data.Repository.Implementation
         public DateTime ModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        private static HFMDBEntities context;
+        private static HomeFinanceDBEntities context;
 
         public IList<DailyPurchaseRepository> Get()
         {
             DailyPurchaseRepository repo = new DailyPurchaseRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var data = (from a in context.DailyPurchases
                         join b in context.Items on a.PurchasedItemId equals b.ItemId
@@ -66,7 +66,7 @@ namespace HFM.Data.Repository.Implementation
         public DailyPurchaseRepository GetById(int dailyPurchaseId)
         {
             DailyPurchaseRepository repo = new DailyPurchaseRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var data = (from a in context.DailyPurchases
                         join b in context.Items on a.PurchasedItemId equals b.ItemId
@@ -101,7 +101,7 @@ namespace HFM.Data.Repository.Implementation
         public DailyPurchaseRepository Add(DailyPurchaseRepository data)
         {
             DailyPurchaseRepository repo = new DailyPurchaseRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             context.DailyPurchases.Add(new DailyPurchase()
             {
@@ -120,7 +120,7 @@ namespace HFM.Data.Repository.Implementation
         public DailyPurchaseRepository Update(DailyPurchaseRepository data)
         {
             DailyPurchaseRepository repo = new DailyPurchaseRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             try
             {
@@ -145,7 +145,7 @@ namespace HFM.Data.Repository.Implementation
         public void Delete(int id)
         {
             DailyPurchaseRepository repo = new DailyPurchaseRepository();
-            context = new HFMDBEntities();
+            context = new HomeFinanceDBEntities();
 
             var details = context.DailyPurchases.Where(n => n.DailyPurchaseId == id).First();
 
