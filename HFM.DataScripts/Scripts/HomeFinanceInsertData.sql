@@ -203,4 +203,9 @@ INSERT INTO [dbo].Items (ItemName,ItemCategoryId, ItemSubCategoryId, StoreId, Qu
 
 GO
 
-
+INSERT INTO [dbo].BankAccountType(BankAccountTypeName) VALUES ('Chase')
+INSERT INTO [dbo].BankAccountType(BankAccountTypeName) VALUES ('BOFA-Checkings Account')
+INSERT INTO [dbo].BankAccountType(BankAccountTypeName) VALUES ('BOFA-Credit Card Account')
+INSERT INTO [dbo].BankAccountType(BankAccountTypeName) VALUES ('ICICI - NRE')
+INSERT INTO [dbo].BankAccountType(BankAccountTypeName) VALUES ('ICICI - NRO')
+GO

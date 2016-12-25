@@ -43,9 +43,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\BankStatements.sql" />
-    <Content Include="Scripts\HFMInsertData.sql" />
-    <Content Include="Scripts\HFMObjects.sql" />
+    <Content Include="Scripts\HomeFinanceDBObjects.sql" />
+    <Content Include="Scripts\HomeFinanceInsertData.sql" />
     <Content Include="Scripts\SelectAllItems.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
